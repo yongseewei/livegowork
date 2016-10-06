@@ -12,4 +12,9 @@
 
 
 
+<p><%= form_for @job_application do |f| %></p>
+	<%= f.hidden_field :job_id, :value => @job.id %>
+	<%= f.submit "apply now" %>
+<% end %>
+
 
