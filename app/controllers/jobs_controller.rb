@@ -7,15 +7,17 @@ class JobsController < ApplicationController
   end
 
   def show
+    @job_application = JobApplication.new
   end
 
   def new
-  	@job = Job.new
+    @job = Job.new
   end	
 
   def create
-
+    
     @job = current_user.jobs.new(job_params)
+    
     if @job.save
        redirect_to root_url
     else

@@ -12,9 +12,25 @@
 
 
 
-<p><%= form_for @job_application do |f| %></p>
-	<%= f.hidden_field :job_id, :value => @job.id %>
-	<%= f.submit "apply now" %>
+
+<p>
+	<% if current_user.applied?(@job) %>
+	thanks for your application!
+
+	<% else %>
+	<%= form_for @job_application, method: :post do |f| %>
+		<%= f.hidden_field :job_id, value: @job.id %>
+		<%= f.hidden_field :user_id, value: current_user.id %>
+		<%= f.submit "Apply now" %>
+	<% end %>
 <% end %>
+</p>
 
 
+<% if @job.user_id == current_user.id %>
+	<p><%= link_to 'Remove this job', job_path(@job), method: :delete %></p>
+	<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>
+
+	
+
+<% end %>
