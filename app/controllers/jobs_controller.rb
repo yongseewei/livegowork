@@ -3,7 +3,10 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :destroy, :update]
 
   def index
-  	@job = Job.all # index function
+  	@jobs = Job.all # index function
+  end
+
+  def show
   end
 
   def new
@@ -38,7 +41,7 @@ class JobsController < ApplicationController
 	end
 
   def find_job
-    @job = Job.find(params[:id])
+  	@job = Job.find(params[:id])
   end
 
   private

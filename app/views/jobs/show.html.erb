@@ -1,5 +1,4 @@
 
-<%= f.hidden_field :job_id, :value => @job.id %>
 
 
 
@@ -10,12 +9,7 @@
 	<li> <%= @job.location %> </li>
 	<li> <%= @job.salary %> </li>
 </ul>
-	<%end %>
 
 
 
-<% if @job.user_id == current_user.id %>
-		<p><%= link_to 'Remove this listing', listing_path(@listing), method: :delete %></p>
-		<p><%= link_to 'Edit this listing', edit_listing_path(@listing) %></p>
-        <br>
-<% end %>
+

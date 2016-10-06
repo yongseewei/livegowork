@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   root 'jobs#index'
+
+  resources :jobs
+  get '/job/:id' => 'job#show'
  
 end
 
