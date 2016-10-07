@@ -1,8 +1,13 @@
 class UsersController < Clearance::UsersController
+
+  
+
   def new
     @user = user_from_params
     render template: "users/new"
   end
+
+
 
   def create
     @user = user_from_params
@@ -19,6 +24,9 @@ class UsersController < Clearance::UsersController
     Clearance.configuration.redirect_url
   end
 
+  def edit
+  end
+  
   def user_from_params
     first_name =user_params.delete(:first_name)
     last_name =user_params.delete(:last_name)
@@ -35,6 +43,11 @@ class UsersController < Clearance::UsersController
       user.email = email
       user.password = password
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    
   end
 
   def user_params

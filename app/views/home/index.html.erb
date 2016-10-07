@@ -17,3 +17,7 @@
     </div>
   </nav>
 
+
+  <% User.all.each do |user| %>
+  <p><%= user.first_name %></p>
+  <% end %>

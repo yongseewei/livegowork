@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
-
-#navigation
 gem 'bootstrap-sass', '~> 3.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -32,6 +30,9 @@ gem "clearance"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

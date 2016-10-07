@@ -1,0 +1,8 @@
+<h1>Pages#profile</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+
+<div class="panel panel-default"><div>
+<div class="panel"></div>
+
+<h6> <%= current_user.followers.count %></h6>
+<%= render "/components/follow_button", :user => @user %>
