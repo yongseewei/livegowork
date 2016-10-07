@@ -13,8 +13,8 @@ class WelcomeController < ApplicationController
 			@jobs = Job.all
 		end
 		if params[:lat].presence
-			@jobs = Job.near([params[:lat].to_f,params[:lng].to_f],1.15)
-			# byebug
+			zoom =  Math.exp((14.23 - params[:zoom].to_f)*Math.log(2))
+			@jobs = Job.near([params[:lat].to_f,params[:lng].to_f],zoom)
 		end
 		if @jobs.length != 0
 			@hash = Gmaps4rails.build_markers(@jobs) do |job, marker|
@@ -27,6 +27,7 @@ class WelcomeController < ApplicationController
 	      })
 	      marker.infowindow render_to_string(:partial => '/welcome/map', :locals => { :object => job})
 			end
+			# byebug
 		else
 			@hash = Gmaps4rails.build_markers(@search) do |search, marker|
 			  marker.lat coord["lat"]
