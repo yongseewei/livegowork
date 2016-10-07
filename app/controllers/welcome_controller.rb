@@ -1,9 +1,6 @@
 class WelcomeController < ApplicationController
 	def home
-		
 		@search = params[:query].presence
-	
-		# params = {term: 'shopping', limit: '3'}
 		if @search
 			# poi = Yelp.client.search(@search, params)
 			location = Geocoder.search(@search)
@@ -25,7 +22,7 @@ class WelcomeController < ApplicationController
 	        "width":  50,
 	        "height": 50
 	      })
-	      marker.infowindow render_to_string(:partial => '/welcome/map', :locals => { :object => job})
+	      marker.infowindow render_to_string(:partial => '/common/mapInfo', :locals => { :object => job})
 			end
 			# byebug
 		else

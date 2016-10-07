@@ -18,7 +18,7 @@ $(document).ready(function(){
 	function map_ajax(){
 		$.ajax({
   		type: 'GET',
-  		url: '/',
+  		url: '/jobs',
   		data:  { lat: handler.map.serviceObject.center.lat(), 
   						 lng: handler.map.serviceObject.center.lng(), 
   						 zoom: handler.map.serviceObject.zoom },
