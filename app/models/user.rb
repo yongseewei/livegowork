@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
 
 	def applied?(job)
 		JobApplication.find_by(user_id: self.id, job_id: job.id)
-	end 
+	end
   
 end

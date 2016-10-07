@@ -6,33 +6,25 @@
 
 	<div class="content">
 
-
-
 		<div class="nav">
 			<ul class="links">
 				<li id="search"> Search </li>
 				<a href = /jobs/new id="new_job"> List job </a>
 		</div>
 
-
 		<div class="main">
-
 
 			<h2> all jobs </h2>
 				<% @jobs.each do |job| %>
-				
-				<%= link_to job.title, job_path(job) %>				<br>
-
-				<br>	
-
-
-					<% end %>
+					<% unless job.confirmed? && current_user.id != job.user_id %>
+					<%= link_to job.title, job_path(job) %>	<br>
+					<br>	
+				<% end %>
+				<% end %>
 			</div>
 
 
-
 		</div>
-
 
 	</div>
 

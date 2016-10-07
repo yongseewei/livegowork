@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :jobs
-  resources :job_applications, only: [:new, :create, :show]
-
+  resources :jobs do
+    resources :job_applications  #, only: [:index, :new, :create, :show]
+  end
  # The priority is based upon order of creation: first created -> highest priority.
   # get 'home/index'
 

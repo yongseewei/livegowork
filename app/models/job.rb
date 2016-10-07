@@ -9,4 +9,13 @@ class Job < ActiveRecord::Base
 
 	# mount_uploaders :avatars, AvatarUploader
 
+	def confirmed?
+		JobApplication.find_by(job_id: self.id, confirmed: true)
+	end
+
+	def confirmed_applicant
+		applicant = JobApplication.find_by(job_id: self.id, confirmed: true)	
+		$confirmed_applicant = User.find(applicant.user_id)
+	end
+
 end

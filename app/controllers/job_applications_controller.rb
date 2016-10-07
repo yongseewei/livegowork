@@ -1,6 +1,6 @@
 class JobApplicationsController < ApplicationController
 
-  before_action :find_job_application, only: [:show, :destroy, :confirm_job_application]
+  before_action :find_job_application, only: [:show, :destroy, :update]
  	def new #
  		
  		@job_application = JobApplication.new
@@ -8,10 +8,13 @@ class JobApplicationsController < ApplicationController
  	end 
 
 	def index
-		@job_applications = JobApplication.all
+		
+		@job_application = JobApplication.where(job_id: params[:job_id])
+
 	end
 
 	def show
+
 	end
 
 	def create
@@ -28,9 +31,10 @@ class JobApplicationsController < ApplicationController
 	  	end
 	end
 
-	def confirm_job_application #update method confirms the booking
-		
+	def update 	
 		@job_application.update(confirmed: true)
+		flash[:success] = "You have confirmed this applicant for your job!"
+		redirect_to @job_application.job
 	end
 
 
@@ -47,7 +51,7 @@ class JobApplicationsController < ApplicationController
 private
 
   def job_application_params
-    params.require(:job_application).permit(:user_id, :job_id)
+    params.require(:job_application).permit(:user_id, :job_id, :job_application_id)
   end
 
 
