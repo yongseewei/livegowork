@@ -27,11 +27,15 @@ ActiveRecord::Schema.define(version: 20161006060445) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -40,6 +44,10 @@ ActiveRecord::Schema.define(version: 20161006060445) do
     t.string   "encrypted_password", limit: 128, null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128, null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.date     "dob"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
