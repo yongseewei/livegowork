@@ -1,0 +1,11 @@
+
+	<p> Here are the applicants for your job:  </p>
+	<% @job_application.each do |a| %>
+		<%= link_to a.user.first_name, '#' %>
+		<p><%= link_to 'Confirm this applicant', job_job_application_path(id: a.id), method: :patch %></p>
+		<br>	
+	<% end %>
+
+
+
+

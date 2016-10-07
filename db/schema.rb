@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20161006031608) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "job_applications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "confirmed",  default: false
+    t.text     "message"
+  end 
+
+  create_table "authentications", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "token"
+    t.string   "provider"
+    t.string   "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
@@ -35,6 +55,10 @@ ActiveRecord::Schema.define(version: 20161006031608) do
     t.string   "encrypted_password", limit: 128, null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128, null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.date     "dob"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
