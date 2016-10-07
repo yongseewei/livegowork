@@ -1,0 +1,43 @@
+
+
+
+
+
+<ul> 
+	<li> <%= @job.title %> </li>
+	<li> <%= @job.description %> </li>
+	<li> <%= @job.location %> </li>
+	<li> <%= @job.salary %> </li>
+</ul>
+
+
+<% if @job.confirmed? && current_user.id != @job.user_id %>
+	<p>	sorry, this job is now closed. </p>
+	<% elsif @job.confirmed? && current_user.id == @job.user_id %>
+	<p>	Congratulations! You have approved an applicant: </p>
+		<% @job.confirmed_applicant %>
+		<%= $confirmed_applicant.first_name %> <%= $confirmed_applicant.last_name %>
+	<% else %>
+	<p> 
+		<% unless @job.user_id == current_user.id %> 
+		<% if current_user.applied?(@job) %>
+		thanks for your application!
+			<% else %>
+				<%= form_for [@job, @job_application], method: :post do |f| %>
+					<%= f.hidden_field :job_id, value: @job.id %>
+					<%= f.hidden_field :user_id, value: current_user.id %>
+					<%= f.submit "Apply now" %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+	</p>
+
+
+<% if @job.user_id == current_user.id %>
+	<% unless @job.confirmed? %>
+		<p><%= link_to 'Remove this job', job_path(@job), method: :delete %></p>
+		<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>
+		<p><%= link_to 'View applicants', job_job_applications_path(@job) %></p>
+	<% end %>
+<% end %>
