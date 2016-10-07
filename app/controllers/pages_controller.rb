@@ -1,13 +1,12 @@
+# The pages controller contains all of the code for any page inside of/pages
 class PagesController < ApplicationController
-  def index
+  
+# back-end code for pages/profile
+  def profile
+
   end
 
-  def home
-  end
-
-  def profie
-  end
-
+# back-end code for pages/explore
   def explore
   end
 end

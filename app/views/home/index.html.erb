@@ -17,12 +17,3 @@
     </div>
   </nav>
 
-
- <%@users.each do |user|%>
- <br>
-  <%= user.email %>
-  <%= link_to "follow me", relationships_path(followed_id: user.id)%>
-  <%end%>
-
-
-  
