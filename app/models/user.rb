@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     # self.reviews.sum(:score)
   end
 
+  def review
+    Review.where(reviewee_id: self.id)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

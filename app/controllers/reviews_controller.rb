@@ -9,11 +9,6 @@ before_action :find_review, only: [:show]
 	def show
 	end
 
-	def average_score
-		total_reviews = Review.where(reviewee_id: params[:reviewee_id]).count
-
-	end
-
 	def new
 	end
 

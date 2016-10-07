@@ -5,3 +5,7 @@
 
 <p> <%= @user.review_score.to_f %> </p>
 
+<% @user.review.each do |review| %>
+	<p> <%= review.score %> </p>
+	<p> <%= review.comments %> </p>
+<% end %>
