@@ -1,0 +1,15 @@
+<%= form_tag "/",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
+  <div class="form-group" style="background-color:white;" >
+     <%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search", autocomplete: "off", :autofocus=>true}  %>
+    </div>
+  <%= submit_tag "Search", {class: "btn btn-default"} %>
+<% end %>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<%= javascript_tag do%>
+  markerabc = (<%=raw @hash.to_json %>);
+<%end%>
+
+<%= render 'list', :object => @jobs %>
