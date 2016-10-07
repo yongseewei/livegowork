@@ -1,15 +1,21 @@
-<div id="clearance" class="sign-up">
-  <h2><%= t(".title") %></h2>
+<div class="container" id="sign-page">
+<div id="sign-box">
+  <div id="clearance" class="sign-up">
+    <h2><%= t(".title") %></h2>
 
-  <%= form_for @user do |form| %>
-    <%= render partial: '/users/form', object: form %>
+    <%= form_for @user do |form| %>
+      <%= render partial: '/users/form', object: form %>
 
-    <div class="submit-field">
-      <%= form.submit %>
-    </div>
+      <div class="form-group">
+        <%= form.submit "submit", class:"btn btn-outline-primary" %>
+    <%= link_to t(".sign_in"), sign_in_path %>
+      </div>
+      <h3 align="center">
+     or
+    </h3>
+      <%= link_to "Connect with Facebook", "/auth/facebook", id: "sign_in", class:"btn btn-block btn-social btn-facebook"%>
 
-    <div class="other-links">
-      <%= link_to t(".sign_in"), sign_in_path %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+</div>
 </div>
