@@ -1,13 +1,15 @@
 class UsersController < Clearance::UsersController
 
-  before_action :find_user, only: [:show, :destroy, :update]
+
+before_action :find_user, only: [:show, :edit, :destroy, :update]
 
   def new
     @user = user_from_params
     render template: "users/new"
   end
 
-
+  def show
+  end
 
   def create
     @user = user_from_params
@@ -71,10 +73,14 @@ end
     end
   end
 
+  def find_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
     params.require(:user).permit(:email,:first_name,:last_name,:password,:avatar,:user_id)
 
     # params[Clearance.configuration.user_parameter] || Hash.new
   end
-
+  
 end

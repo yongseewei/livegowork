@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   include Clearance::User
 
-  has_many :jobs
-  has_many :job_applications
+  has_many :jobs, :dependent => :destroy
+  has_many :job_applications, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
 
 	def applied?(job)
 		JobApplication.find_by(user_id: self.id, job_id: job.id)
@@ -34,6 +35,26 @@ class User < ActiveRecord::Base
 
   def password_optional?
     true
+  end
+
+
+  def self.by_reviews #(page)
+    joins(:reviews).group('users.id').order('SUM(points.value) DESC')
+  end
+
+  def review_score
+    sum = Review.where(reviewee_id: self.id).sum(:score)
+    count = Review.where(reviewee_id: self.id).count.to_f
+    (sum / count).to_f.round(1)
+    # self.reviews.sum(:score)
+  end
+
+  def review
+    Review.where(reviewee_id: self.id)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
 end
