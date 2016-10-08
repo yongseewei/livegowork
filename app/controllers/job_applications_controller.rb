@@ -31,7 +31,6 @@ class JobApplicationsController < ApplicationController
 		redirect_to @job_application.job
 	end
 
-
 	def destroy
 		@job_application.destroy
     redirect_to root_path
