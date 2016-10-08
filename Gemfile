@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -36,13 +36,21 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 #bootstrap
-gem 'bootstrap-sass', '~> 3.3.6'
+# gem 'bootstrap'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
+
+gem 'faker'
+
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'mini_magick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -59,3 +67,4 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
