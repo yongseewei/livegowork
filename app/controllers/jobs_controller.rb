@@ -1,43 +1,33 @@
 class JobsController < ApplicationController
+  include JobsHelper
   before_action :find_job, only: [:show, :edit, :destroy, :update]
-
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
-    if @search
-      location = Geocoder.search(@search)
-      coord = location[0].data["geometry"]["location"]
-      @jobs = Job.near([coord["lat"],coord["lng"]],2.33)
-    end
     if params[:lat].presence
-      zoom =  Math.exp((14.23 - params[:zoom].to_f)*Math.log(2))
+      zoom =  Math.exp((14.24 - params[:zoom].to_f)*Math.log(2))
       @jobs = Job.near([params[:lat].to_f,params[:lng].to_f],zoom)
+    elsif filter_params != {}
+      # byebug
+      @jobs = Job.where(id: params[:jobs].split(" "))
+      @jobs = @jobs.filter_by_range(filter_params)
+    elsif @search
+      location = Geocoder.search(@search)
+      @coord = location[0].data["geometry"]["location"]
+      @jobs = Job.near([@coord["lat"],@coord["lng"]],2.33)
     end
     if @jobs.length != 0
-      @hash = Gmaps4rails.build_markers(@jobs) do |job, marker|
-        marker.lat job.latitude
-        marker.lng job.longitude
-        marker.picture({
-          "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png",
-          "width":  50,
-          "height": 50
-        })
-        marker.infowindow render_to_string(:partial => '/welcome/map', :locals => { :object => job})
-      end
+      set_marker
     else
-      @hash = Gmaps4rails.build_markers(@search) do |search, marker|
-        marker.lat coord["lat"]
-        marker.lng coord["lng"]
-        marker.picture({
-          "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png",
-          "width":  0,
-          "height": 0
-        })
-      end
+      set_position
     end
     respond_to do |format|
       format.js # index.js.erb
       format.html # index.html.erb
     end
+  end
+
+  def filter
+    byebug
   end
 
   def show
@@ -81,6 +71,10 @@ class JobsController < ApplicationController
   private
   def job_params
     params.require(:job).permit(:title, :description, :location, :salary, {avatars:[]}, {:tag_ids=>[]}, :user_id )
+  end
+
+  def filter_params
+    params.permit(:min, :max).reject { |x, y| y.empty? }  
   end
 
 end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  post "/jobs/filter" => "jobs#filter"
   # get '/profile' => 'pages#profile'
 
   get '/explore' => 'pages#explore'
