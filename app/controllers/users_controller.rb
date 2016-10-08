@@ -1,7 +1,11 @@
 class UsersController < Clearance::UsersController
 
+<<<<<<< HEAD
+  
+=======
 
 before_action :find_user, only: [:show, :edit, :destroy, :update]
+>>>>>>> master
 
   def new
     @user = user_from_params
@@ -73,8 +77,18 @@ end
     end
   end
 
+<<<<<<< HEAD
+  def show
+    @user = User.find(params[:id])
+    
+  end
+
+  def user_params
+    params[Clearance.configuration.user_parameter] || Hash.new
+=======
   def find_user
     @user = User.find(params[:id])
+>>>>>>> master
   end
 
   def user_params

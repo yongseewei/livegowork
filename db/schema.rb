@@ -11,8 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20161007094201) do
 
-ActiveRecord::Schema.define(version: 20161007083245) do
   
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,38 @@ ActiveRecord::Schema.define(version: 20161007083245) do
     t.text     "comments"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "Cleaning"
+    t.string   "Cooking"
+    t.string   "Housekeeping"
+    t.string   "Painting_decorating"
+    t.string   "Social_media"
+    t.string   "Social_work"
+    t.string   "Party_promoter"
+    t.string   "Reception"
+    t.string   "Teaching_languages"
+    t.string   "Web_developer"
+    t.string   "Music"
+    t.string   "Arts"
+    t.string   "Photography"
+    t.string   "Tour_guide"
+    t.string   "Bartending"
+    t.string   "Night_Shift"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "users", force: :cascade do |t|
