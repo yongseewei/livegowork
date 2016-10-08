@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,6 +32,12 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form> -->
+               <%= form_tag "/jobs",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
+                <div class="form-group" style="background-color:white;" >
+                  <%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search", autocomplete: "off", :autofocus=>true}  %>
+                </div>
+                <%= submit_tag "Search", {class: "btn btn-default"} %>
+              <% end %>
               <li><%= link_to "Home",root_path%></li>
               <% if signed_in? %>
               <li><%= link_to "Sign out", sign_out_path, id: "sign_out", method: :delete %></li>

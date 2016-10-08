@@ -1,0 +1,20 @@
+<h1>Jobs#index</h1>
+
+<div class="row"> 
+	<div class="col-md-6">
+		<div class="nav">
+			<ul class="links">
+				<li id="search"> Search </li>
+				<a href = "/jobs/new" id="new_job"> List job </a>
+			</ul>
+		</div>
+		<div class="main">
+			<h2> all jobs </h2>
+			<%= render 'list', :object => @jobs %>
+		</div>
+	</div>
+	<div class = "col-md-6" >
+	  <div id="map" style='width: 100%; height: 400px;'></div>
+	</div>
+</div>
+
