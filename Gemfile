@@ -34,7 +34,15 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 #bootstrap
+# gem 'bootstrap'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
+
+gem 'faker'
+
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'mini_magick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

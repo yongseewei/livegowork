@@ -1,10 +1,11 @@
-<div class="text-field">
+
+<div class="form-group">
   <%= form.label :first_name %>
-  <%= form.text_field :first_name%>
+  <%= form.text_field :first_name, class:"form-control"%>
 </div>
-<div class="text-field">
+<div class="form-group">
   <%= form.label :last_name %>
-  <%= form.text_field :last_name %>
+  <%= form.text_field :last_name,class:"form-control" %>
 </div>
 <!-- <div class="text-field">
   <%= form.label :gender %>
@@ -15,12 +16,12 @@
   <%= form.label :dob %>
   <%= form.text_field :dob %>
 </div> -->
-<div class="text-field">
+<div class="form-group">
   <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
+  <%= form.text_field :email, type: 'email',class:"form-control" %>
 </div>
 
-<div class="password-field">
+<div class="form-group">
   <%= form.label :password %>
-  <%= form.password_field :password %>
+  <%= form.password_field :password,type: 'password',id:"exampleInputPassword1",class:"form-control" %>
 </div>

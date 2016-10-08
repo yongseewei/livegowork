@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
 
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   def self.create_with_auth_and_hash(authentication,auth_hash)
-    
+
     create! do |u|
 
       u.first_name = auth_hash["info"]["first_name"]
