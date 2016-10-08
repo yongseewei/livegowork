@@ -48,12 +48,10 @@ class JobsController < ApplicationController
     @job = Job.new
   end	
 
-  def create
-    
+  def create   
     @job = current_user.jobs.new(job_params)
-    
     if @job.save
-       redirect_to root_url
+       redirect_to @job, notice: "Successfully create new job!"
     else
       render :new
     end
@@ -65,7 +63,7 @@ class JobsController < ApplicationController
   def update
     if @job.update(job_params)
       flash[:success] = 'You have updated your job successfully!'
-       redirect_to job_path(@job)
+      redirect_to job_path(@job)
     else
       render :edit
     end

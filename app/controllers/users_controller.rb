@@ -1,11 +1,5 @@
 class UsersController < Clearance::UsersController
-
-<<<<<<< HEAD
-  
-=======
-
-before_action :find_user, only: [:show, :edit, :destroy, :update]
->>>>>>> master
+  before_action :find_user, only: [:show, :edit, :destroy, :update]
 
   def new
     @user = user_from_params
@@ -17,7 +11,6 @@ before_action :find_user, only: [:show, :edit, :destroy, :update]
 
   def create
     @user = user_from_params
-
     if @user.save
       sign_in @user
       redirect_back_or url_after_create
@@ -26,12 +19,8 @@ before_action :find_user, only: [:show, :edit, :destroy, :update]
     end
   end
 
-  def url_after_create
-    Clearance.configuration.redirect_url
-  end
-
   def edit
-      @user = current_user
+    @user = current_user
   end
 
   def show
@@ -45,17 +34,16 @@ before_action :find_user, only: [:show, :edit, :destroy, :update]
     end
   end
 
-    def destroy
-      @user.destroy
-      redirect_to root_path
-    end
+  def destroy
+    @user.destroy
+    redirect_to root_path
+  end
 
-private
+  private
 
-def find_user
-
-@user = User.find(params[:id])
-end
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_from_params
     first_name =user_params.delete(:first_name)
@@ -77,24 +65,15 @@ end
     end
   end
 
-<<<<<<< HEAD
-  def show
-    @user = User.find(params[:id])
-    
-  end
+  # def user_params
+  #   params[Clearance.configuration.user_parameter] || Hash.new
 
-  def user_params
-    params[Clearance.configuration.user_parameter] || Hash.new
-=======
-  def find_user
-    @user = User.find(params[:id])
->>>>>>> master
+  def url_after_create
+    Clearance.configuration.redirect_url
   end
 
   def user_params
     params.require(:user).permit(:email,:first_name,:last_name,:password,:avatar,:user_id)
-
-    # params[Clearance.configuration.user_parameter] || Hash.new
   end
   
 end

@@ -9,8 +9,7 @@
             </button>
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
-
-            <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
               <!-- <li>
                 <div class="row">
                   <div class="col-md-4 col-md-offset-3">
@@ -31,25 +30,25 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form> -->
-               <%= form_tag "/jobs",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
-                <div class="form-group" style="background-color:white;" >
-                  <%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search", autocomplete: "off", :autofocus=>true}  %>
-                </div>
-                <%= submit_tag "Search", {class: "btn btn-default"} %>
-              <% end %>
-              <li><%= link_to "Home",root_path%></li>
-              <% if signed_in? %>
+            <%= form_tag "/jobs",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
+              <div class="form-group" style="background-color:white;" >
+                <%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search", autocomplete: "off", :autofocus=>true}  %>
+              </div>
+              <%= submit_tag "Search", {class: "btn btn-default"} %>
+            <% end %>
+            <li><%= link_to "New Job", new_job_path %></li>
+            <li><%= link_to "Home",root_path%></li>
+            <% if signed_in? %>
               <li><%= link_to "Sign out", sign_out_path, id: "sign_out", method: :delete %></li>
             <li class="round-image-50">
-            <%= image_tag @user.avatar.url(:small_thumb) %>
+              <%= image_tag current_user.avatar.url(:small_thumb) %>
             </li>
-              <% else %>
-            
+            <% else %> 
               <li><%= link_to t(".sign_in"), sign_in_path %> </li>
               <li><%= link_to t(".sign_up"), sign_up_path %> </li>
-              <% end %>
+            <% end %>
 
-            </ul>
+          </ul>
         </div>
     </div>
 </div>
