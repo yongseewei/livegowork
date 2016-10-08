@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  post "/jobs/filter" => "jobs#filter"
+
   resources :jobs do
     resources :job_applications  #, only: [:index, :new, :create, :show]
   end

@@ -24,21 +24,18 @@ $(document).ready(function(){
   						 zoom: handler.map.serviceObject.zoom },
   		dataType: "script",
   		success: function(msg) {
-  			for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-          handler.removeMarkers(markers);
-        }
-        markers = [];
-        markers = handler.addMarkers(markerabc);
-        handler.bounds.extendWith(markers);
+  			redraw_marker()
   		}
   	});
 	}
-		// google.maps.event.addListener(marker, 'mouseover', function() {
-	
-	// 	infowindow.open(map, this);
-	// });
-	// function zoom(){
- //   current_zoom = handler.map.serviceObject.zoom;
-	// }
+
+	function redraw_marker(){
+		for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+      handler.removeMarkers(markers);
+    }
+    markers = [];
+    markers = handler.addMarkers(markerabc);
+    handler.bounds.extendWith(markers);
+	}
 });
