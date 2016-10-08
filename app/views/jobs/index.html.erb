@@ -2,24 +2,8 @@
 
 <div class="row"> 
 	<div class="col-md-6">
-		<div class="nav">
-			<ul class="links">
-				<li id="search"> Search </li>
-				<a href = "/jobs/new" id="new_job"> List job </a>
-			</ul>
-		</div>
 		<div id="sidebar-wrapper">
-			<div class="col-md-10 col-md-offset-1">
-				<%= form_tag("/jobs", id: "price-filter", remote: true, method: 'get') do %>
-					<label for="amount">Price range:</label>
-					<%= text_field_tag 'range', '' ,id: 'amount', :readonly => true, style: "border:0; color:#f6931f; font-weight:bold; background: none"%>
-					<%= hidden_field_tag :min %>
-					<%= hidden_field_tag :max %>
-					<%= hidden_field_tag :jobs, @jobs.map(&:id), id: '' %>
-					
-					<div id="slider-range"></div>
-				<% end %>
-    	</div>
+			<%= render 'slider' %>
   	</div>
   	<br>
 		<div class="main">
