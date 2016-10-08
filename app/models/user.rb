@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed 
   has_many :followers, through: :passive_relationships, source: :follower
 
-  has_many :job_applications
+  has_many :job_applications, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
 
   #helper method
   def show
@@ -36,8 +37,11 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
 
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   def self.create_with_auth_and_hash(authentication,auth_hash)
-    
+
     create! do |u|
 
       u.first_name = auth_hash["info"]["first_name"]
@@ -57,5 +61,24 @@ class User < ActiveRecord::Base
 
   def password_optional?
     true
+  end
+
+  def self.by_reviews #(page)
+    joins(:reviews).group('users.id').order('SUM(points.value) DESC')
+  end
+
+  def review_score
+    sum = Review.where(reviewee_id: self.id).sum(:score)
+    count = Review.where(reviewee_id: self.id).count.to_f
+    (sum / count).to_f.round(1)
+    # self.reviews.sum(:score)
+  end
+
+  def review
+    Review.where(reviewee_id: self.id)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

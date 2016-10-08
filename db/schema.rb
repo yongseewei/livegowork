@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20161007094201) do
 
+  
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +41,17 @@ ActiveRecord::Schema.define(version: 20161007094201) do
     t.string   "location"
     t.integer  "user_id"
     t.integer  "salary"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewer_id"
+    t.integer  "reviewee_id"
+    t.integer  "score"
+    t.text     "comments"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -77,16 +89,20 @@ ActiveRecord::Schema.define(version: 20161007094201) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "email",                          null: false
-    t.string   "encrypted_password", limit: 128, null: false
-    t.string   "confirmation_token", limit: 128
-    t.string   "remember_token",     limit: 128, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "email",                           null: false
+    t.string   "encrypted_password",  limit: 128, null: false
+    t.string   "confirmation_token",  limit: 128
+    t.string   "remember_token",      limit: 128, null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
     t.date     "dob"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

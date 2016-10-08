@@ -23,7 +23,26 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem "figaro"
-gem "clearance"
+gem 'clearance'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'yelp'
+
+#facebook login
+gem 'omniauth'
+gem 'omniauth-facebook'
+
+#bootstrap
+# gem 'bootstrap'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
+
+gem 'faker'
+
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'mini_magick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
