@@ -11,9 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007094201) do
+ActiveRecord::Schema.define(version: 20161007100157) do
 
-  
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,15 +46,6 @@ ActiveRecord::Schema.define(version: 20161007094201) do
     t.float    "longitude"
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "reviewer_id"
-    t.integer  "reviewee_id"
-    t.integer  "score"
-    t.text     "comments"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -67,25 +57,26 @@ ActiveRecord::Schema.define(version: 20161007094201) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewer_id"
+    t.integer  "reviewee_id"
+    t.integer  "score"
+    t.text     "comments"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "skills", force: :cascade do |t|
-    t.string   "Cleaning"
-    t.string   "Cooking"
-    t.string   "Housekeeping"
-    t.string   "Painting_decorating"
-    t.string   "Social_media"
-    t.string   "Social_work"
-    t.string   "Party_promoter"
-    t.string   "Reception"
-    t.string   "Teaching_languages"
-    t.string   "Web_developer"
-    t.string   "Music"
-    t.string   "Arts"
-    t.string   "Photography"
-    t.string   "Tour_guide"
-    t.string   "Bartending"
-    t.string   "Night_Shift"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.string   "skill"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

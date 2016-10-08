@@ -35,7 +35,6 @@ gem 'omniauth-facebook'
 
 #bootstrap
 # gem 'bootstrap'
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 
@@ -50,8 +49,6 @@ gem 'mini_magick'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-gem 'omniauth'
-gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
