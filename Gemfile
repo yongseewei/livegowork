@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -23,7 +25,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem "figaro"
-gem "clearance"
+gem 'clearance'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'yelp'
 
 #facebook login
 gem 'omniauth'
@@ -31,7 +37,6 @@ gem 'omniauth-facebook'
 
 #bootstrap
 # gem 'bootstrap'
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 
@@ -45,6 +50,7 @@ gem 'mini_magick'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -61,3 +67,4 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+

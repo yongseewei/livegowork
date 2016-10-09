@@ -1,0 +1,29 @@
+<%= form_for @job do |f| %>
+	<p id="job_title">
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+	</p>
+
+	<p id="job_description">
+		<%= f.label :description %>
+		<%= f.text_field :description %>
+	</p>
+
+	<p id="job_location">
+		<%= f.label :location %>
+		<%= f.text_field :location %>
+	</p>
+
+	<p id="job_salary">
+		<%= f.label :salary %>
+		<%= f.text_field :salary %>
+	</p>
+
+
+	<p id="job_submit_button">
+		<%= f.submit %>
+	</p>
+
+
+
+<%end%> 
