@@ -3,31 +3,15 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :destroy, :update]
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
-    if params[:lat].presence
-      zoom =  Math.exp((14.24 - params[:zoom].to_f)*Math.log(2))
-      @jobs = Job.near([params[:lat].to_f,params[:lng].to_f],zoom)
-    elsif filter_params != {}
-      # byebug
-      @jobs = Job.where(id: params[:jobs].split(" "))
-      @jobs = @jobs.filter_by_range(filter_params)
-    elsif @search
-      location = Geocoder.search(@search)
-      @coord = location[0].data["geometry"]["location"]
-      @jobs = Job.near([@coord["lat"],@coord["lng"]],2.33)
-    end
-    if @jobs.length != 0
-      set_marker
-    else
-      set_position
-    end
-    respond_to do |format|
-      format.js # index.js.erb
-      format.html # index.html.erb
-    end
+    @jobs = Job.near(@search,2.33)
+    @jobs.length == 0 ? set_position : set_marker
   end
 
   def filter
-    byebug
+    filtering_params(params).each do |key, value|
+      @jobs = Job.public_send(key, value) if value.present?
+    end
+    set_marker
   end
 
   def show
@@ -73,9 +57,8 @@ class JobsController < ApplicationController
     params.require(:job).permit(:title, :description, :location, :salary, {avatars:[]}, {:tag_ids=>[]}, :user_id )
   end
 
-  def filter_params
-    params.permit(:min, :max).reject { |x, y| y.empty? }  
+  def filtering_params(params)
+    params.slice(:filter_map, :filter_price)
   end
-
 end
 

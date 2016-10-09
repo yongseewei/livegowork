@@ -2,7 +2,8 @@ class Job < ActiveRecord::Base
 	belongs_to :user
 	has_many :job_applications
 
-  scope :salary_range, ->(min, max) { where(salary: min..max)}
+  scope :salary_range, ->(min, max, id) { where(salary: min..max, id: id)}
+  scope :filter_map, ->(loc) { where(salary: loc[:min]..loc[:max]).near([loc[:lat],loc[:lng]],loc[:zoom])}
 
 	geocoded_by :location
 	after_validation :geocode
@@ -23,12 +24,11 @@ class Job < ActiveRecord::Base
 		$confirmed_applicant = User.find(applicant.user_id)
 	end
 
-	def self.filter_by_range(range = {})
-    min = range.fetch(:min)
-    max = range.fetch(:max)
-
-    if min && max 
-      return salary_range(min, max)
-    end
+	def self.filter_price(params)
+		id = params[:jobs].split(" ")
+    min = params.fetch(:min)
+    max = params.fetch(:max) == "500" ? "9999" : params.fetch(:max)
+    
+    return salary_range(min, max, id) if min && max 
   end
 end

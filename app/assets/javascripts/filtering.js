@@ -9,14 +9,14 @@ $(function() {
 	    $( "#amount" ).val( "RM" + ui.values[ 0 ] + " - RM" + ui.values[ 1 ] );
 	  },
 	  change: function(event, ui) {
-			$("#min").attr('value', $("#slider-range").slider("values", 0));
-			$("#max").attr('value', $("#slider-range").slider("values", 1));
+			$("#filter_price_min").attr('value', $("#slider-range").slider("values", 0));
+			$("#filter_price_max").attr('value', $("#slider-range").slider("values", 1));
 			$(this).parent().submit();
 		}
 	});
 	$("#price-filter").submit(function(event){
 		$.ajax({
-			type: 'GET',
+			type: 'POST',
 			url: $(this).attr('action'),
 			data: $(this).serialize(),
 			dataType: "script",
