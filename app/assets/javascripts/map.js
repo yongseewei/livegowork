@@ -17,11 +17,13 @@ $(document).ready(function(){
 	
 	function map_ajax(){
 		$.ajax({
-  		type: 'GET',
-  		url: '/jobs',
-  		data:  { lat: handler.map.serviceObject.center.lat(), 
+  		type: 'POST',
+  		url: '/jobs/filter',
+  		data:  {filter_map: { lat: handler.map.serviceObject.center.lat(), 
   						 lng: handler.map.serviceObject.center.lng(), 
-  						 zoom: handler.map.serviceObject.zoom },
+  						 zoom: zoom_to_radius(),
+  						 min: $("#slider-range").slider("values", 0),
+  						 max: max_price() }},
   		dataType: "script",
   		success: function(msg) {
   			redraw_marker()
@@ -37,5 +39,18 @@ $(document).ready(function(){
     markers = [];
     markers = handler.addMarkers(markerabc);
     handler.bounds.extendWith(markers);
+	}
+
+	function zoom_to_radius(){
+		return Math.exp((14.24 - handler.map.serviceObject.zoom)*Math.log(2))
+	}
+
+	function max_price(){
+		var max = $("#slider-range").slider("values", 1) 
+		if (max == "500"){
+			return "9999"
+		}else{
+			return max
+		}
 	}
 });
