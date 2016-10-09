@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/rate' => 'rater#create', :as => 'rate'
   root 'home#index'
 
   resources :jobs do
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
  # The priority is based upon order of creation: first created -> highest priority.
   # get 'home/index'
 
+  resources :reviews
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 

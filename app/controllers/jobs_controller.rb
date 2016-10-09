@@ -2,6 +2,7 @@ class JobsController < ApplicationController
 
   before_action :find_job, only: [:show, :edit, :destroy, :update]
 
+
   def index
   	@jobs = Job.all # index function
   end

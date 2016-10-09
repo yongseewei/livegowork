@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :job_applications, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
 
+  # ratyrate_rateable 'score'
+  # ratyrate_rater
+
 	def applied?(job)
 		JobApplication.find_by(user_id: self.id, job_id: job.id)
 	end
@@ -48,6 +51,18 @@ class User < ActiveRecord::Base
 
   def review
     Review.where(reviewee_id: self.id)
+  end
+
+  def check_if_reviewed?(user)
+    Review.where(reviewer_id: user.id, reviewee_id: self.id).any?
+  end
+
+  def taken_job?
+    JobApplication.where(user_id: self.id, confirmed: true).any?
+  end
+
+  def posted_job?(user)
+    Job.where(user_id: user.id).any?
   end
 
   def full_name
