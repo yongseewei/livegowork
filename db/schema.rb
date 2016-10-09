@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007082743) do
+
+ActiveRecord::Schema.define(version: 20161007100157) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +53,8 @@ ActiveRecord::Schema.define(version: 20161007082743) do
     t.integer  "salary"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -86,6 +90,17 @@ ActiveRecord::Schema.define(version: 20161007082743) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "reviewer_id"
     t.integer  "reviewee_id"
@@ -95,17 +110,34 @@ ActiveRecord::Schema.define(version: 20161007082743) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string   "skill"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "email",                          null: false
-    t.string   "encrypted_password", limit: 128, null: false
-    t.string   "confirmation_token", limit: 128
-    t.string   "remember_token",     limit: 128, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "email",                           null: false
+    t.string   "encrypted_password",  limit: 128, null: false
+    t.string   "confirmation_token",  limit: 128
+    t.string   "remember_token",      limit: 128, null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
     t.date     "dob"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

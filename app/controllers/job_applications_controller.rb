@@ -1,20 +1,15 @@
 class JobApplicationsController < ApplicationController
 
   before_action :find_job_application, only: [:show, :destroy, :update]
- 	def new #
- 		
+ 	def new 
  		@job_application = JobApplication.new
-
  	end 
 
 	def index
-		
 		@job_application = JobApplication.where(job_id: params[:job_id])
-
 	end
 
 	def show
-
 	end
 
 	def create
@@ -27,7 +22,6 @@ class JobApplicationsController < ApplicationController
 	      redirect_to @job_application.job
 	  	else
 	    	redirect_to job_path(params[:job_application][:job_id])
-
 	  	end
 	end
 
@@ -37,7 +31,6 @@ class JobApplicationsController < ApplicationController
 		redirect_to @job_application.job
 	end
 
-
 	def destroy
 		@job_application.destroy
     redirect_to root_path
@@ -46,13 +39,10 @@ class JobApplicationsController < ApplicationController
 	def find_job_application
 		@job_application = JobApplication.find(params[:id])
 	end
-
-		
-private
+	
+	private
 
   def job_application_params
     params.require(:job_application).permit(:user_id, :job_id, :job_application_id)
   end
-
-
 end

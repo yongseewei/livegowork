@@ -1,31 +1,19 @@
 <h1>Jobs#index</h1>
-<p>Find me in app/views/jobs/index.html.erb</p>
 
-<div class="container"> 
-
-
-	<div class="content">
-
-		<div class="nav">
-			<ul class="links">
-				<li id="search"> Search </li>
-				<a href = /jobs/new id="new_job"> List job </a>
-		</div>
-
+<div class="row"> 
+	<div class="col-md-6">
+		<div id="sidebar-wrapper">
+			<%= render 'slider' %>
+  	</div>
+  	<br>
 		<div class="main">
-
-			<h2> all jobs </h2>
-				<% @jobs.each do |job| %>
-					<% unless job.confirmed? && current_user.id != job.user_id %>
-					<%= link_to job.title, job_path(job) %>	<br>
-					<br>	
-				<% end %>
-				<% end %>
-			</div>
-
-
+			<h2> all jobs </h2>		
+    	<br>
+			<%= render 'list', :object => @jobs %>
 		</div>
-
 	</div>
-
+	<div class = "col-md-6" >
+	  <div id="map" style='width: 100%; height: 400px;'></div>
+	</div>
 </div>
+

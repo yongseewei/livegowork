@@ -1,10 +1,18 @@
 class JobsController < ApplicationController
-
+  include JobsHelper
   before_action :find_job, only: [:show, :edit, :destroy, :update]
 
-
   def index
-  	@jobs = Job.all # index function
+  	@search = params[:query].presence || "Kuala Lumpur"
+    @jobs = Job.near(@search,2.33)
+    @jobs.length == 0 ? set_position : set_marker
+  end
+
+  def filter
+    filtering_params(params).each do |key, value|
+      @jobs = Job.public_send(key, value) if value.present?
+    end
+    set_marker
   end
 
   def show
@@ -15,12 +23,10 @@ class JobsController < ApplicationController
     @job = Job.new
   end	
 
-  def create
-    
+  def create   
     @job = current_user.jobs.new(job_params)
-    
     if @job.save
-       redirect_to root_url
+       redirect_to @job, notice: "Successfully create new job!"
     else
       render :new
     end
@@ -32,7 +38,7 @@ class JobsController < ApplicationController
   def update
     if @job.update(job_params)
       flash[:success] = 'You have updated your job successfully!'
-       redirect_to job_path(@job)
+      redirect_to job_path(@job)
     else
       render :edit
     end
@@ -52,4 +58,8 @@ class JobsController < ApplicationController
     params.require(:job).permit(:title, :description, :location, :salary, {avatars:[]}, {:tag_ids=>[]}, :user_id )
   end
 
+  def filtering_params(params)
+    params.slice(:filter_map, :filter_price)
+  end
 end
+
