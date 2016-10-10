@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # get '/profile' => 'pages#profile'
 
   get '/explore' => 'pages#explore'
+  post '/rate' => 'rater#create', :as => 'rate'
 
   resources :jobs do
     resources :job_applications  #, only: [:index, :new, :create, :show]
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
  # The priority is based upon order of creation: first created -> highest priority.
   # get 'home/index'
 
+  resources :reviews
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 

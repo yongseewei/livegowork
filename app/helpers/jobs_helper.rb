@@ -13,14 +13,15 @@ module JobsHelper
 	end
 
 	def set_position
-		@hash = Gmaps4rails.build_markers(@search) do |search, marker|
-      marker.lat @coord["lat"]
-      marker.lng @coord["lng"]
+    coord = Geocoder.coordinates(@search)
+    @hash = Gmaps4rails.build_markers(@search) do |search, marker|
+      marker.lat coord[0]
+      marker.lng coord[1]
       marker.picture({
-        "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png",
-        "width":  0,
-        "height": 0
-      })
-    end
+      "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png (1KB) ",
+      "width":  0,
+      "height": 0
+       })
+   end
 	end
 end

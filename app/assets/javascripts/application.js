@@ -19,3 +19,6 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+//= require jquery.raty
+//= require ratyrate
+//= require jquery.raty.min

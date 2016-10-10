@@ -1,0 +1,24 @@
+<% @review = Review.new %>	
+    <%= form_for @review do |form| %>
+      <div class="text-field">
+      <%= form.label :"Score" %>		
+      <%= form.hidden_field :reviewee_id, :value => @user.id %>
+  		<%= form.hidden_field :reviewer_id, :value => current_user.id %>
+      </div>
+      <div id="user_stars"></div>
+      <div class="text-field">
+        <%= form.label :"Comments" %>
+        <%= form.text_area :comments, type: 'text', :required => true, class: 'form-control' %>
+      </div>
+      
+    <%= form.submit "Submit Review", class: "btn btn-primary" %>
+    <% end %>
+      <script>
+        $('#user_stars').raty({
+          path: '/assets',
+          scoreName: 'review[score]',
+          score: 1
+        });
+      </script>
+
+	 

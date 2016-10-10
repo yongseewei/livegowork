@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/bmc/jquery-raty-rails.git
+  revision: d36753c77c9b825e6e2746c1c70c3b11b85b86cc
+  specs:
+    jquery-raty-rails (0.0.2)
+      rails (>= 3.2.3)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: b01f47407a03feabd41ac8786b577310e3be87b6
   specs:
@@ -165,6 +172,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
+    ratyrate (1.2.2.alpha)
     rdoc (4.2.2)
       json (~> 1.4)
     sass (3.4.22)
@@ -219,6 +227,7 @@ DEPENDENCIES
   gmaps4rails
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-raty-rails!
   jquery-ui-rails (~> 5.0, >= 5.0.5)
   mini_magick
   omniauth
@@ -226,6 +235,7 @@ DEPENDENCIES
   paperclip!
   pg (~> 0.15)
   rails (= 4.2.6)
+  ratyrate
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

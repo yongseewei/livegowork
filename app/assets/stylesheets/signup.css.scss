@@ -32,10 +32,23 @@
   margin-top: 200px;
   margin-right: 350px;
   width: 30em;
-  height: 38em;
+  height: 35em;
   align-items: center;
   background-color: rgba(white, 0.5);
 }
+
+
+#sign-boxs{
+  float :right;
+  margin-top: 200px;
+  margin-right: 350px;
+  width: 28em;
+  height: 32em;
+  align-items: center;
+  background-color: rgba(white, 0.8);
+}
+
+
 .sign-up {
 
 
@@ -44,6 +57,14 @@
   width: 25em;
 
 
+}
+
+.sign-in {
+
+  padding-left: 90px;
+
+  width: 25em;
+  
 }
 
 .btn.outline {
