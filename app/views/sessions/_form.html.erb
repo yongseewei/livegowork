@@ -9,6 +9,10 @@
     <%= form.password_field :password %>
   </div>
 
+  <div >
+    <%= form.hidden_field :this_url, value: request.path_info  %>
+  </div>
+
   <div class="submit-field">
     <%= form.submit %>
   </div>
