@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: fa9d1e3d301b03cf2e8457a530c162265f439bf2
+  specs:
+    carrierwave (1.0.0.beta)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: b01f47407a03feabd41ac8786b577310e3be87b6
   specs:
@@ -225,6 +234,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bootstrap-social-rails
   byebug
+  carrierwave!
   clearance
   coffee-rails (~> 4.1.0)
   faker

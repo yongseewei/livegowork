@@ -30,7 +30,7 @@ $(document).ready(function(){
       if (minDate < new Date( gon.reservations[1][0])){
         minDate = new Date( gon.reservations[1][0]);
       }
-       if (maxDate > new Date( gon.reservations[1][1])){
+      if (maxDate > new Date( gon.reservations[1][1])){
         maxDate = new Date( gon.reservations[1][1]);
       }
       return {

@@ -1,6 +1,11 @@
 <div id="job_show" class="row" >
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-default">
+			<div class="panel-heading list_image text-center">
+				<% if @job.images.first != nil %>
+ 					<%= render 'jobs/carousel' %>
+ 				<% end %>
+			</div>
 			<div class="panel-body">
 				<div class="row-fluid">
 					<div class="col-md-8">

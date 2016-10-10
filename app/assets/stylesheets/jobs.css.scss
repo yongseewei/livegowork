@@ -21,10 +21,12 @@
 #sidebar-wrapper{
 	opacity: 1.0;
 	position: fixed;
-	height: 20%;
+	height: 150px;
 	width: 50%;
   background-color: #fff;
   overflow-y: hidden;
+	z-index: 9999;
+	left: 0px !important;
 }
 
 .spacer{
@@ -35,6 +37,7 @@
 
 .job-lists{
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #map-container{
@@ -46,6 +49,11 @@
 
 #list_job .box{
 	position:relative	
+}
+
+#list_job .panel-heading{
+	padding: 0px !important;
+	background: #FFF !important;
 }
 
 .job-span{
@@ -78,4 +86,9 @@
 
 .job-info-col td{
 	text-align:left; 
+}
+
+.info_window_image{
+	max-width: 50px;
+	max-height: 50px;
 }

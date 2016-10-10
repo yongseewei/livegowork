@@ -44,6 +44,7 @@ gem 'faker'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'mini_magick'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 gem 'gon', '~> 5.1.2'
 gem 'geocomplete_rails'
