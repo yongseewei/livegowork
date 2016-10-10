@@ -3,7 +3,7 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :destroy, :update]
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
-    @jobs = Job.near(@search,2.33)
+    @jobs = Job.near(@search,3.99)
     @jobs.length == 0 ? set_position : set_marker
   end
 

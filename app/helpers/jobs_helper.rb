@@ -4,20 +4,22 @@ module JobsHelper
       marker.lat job.latitude
       marker.lng job.longitude
       marker.picture({
-        "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png",
+        # "url": "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Pink-icon.png",
+        "url": "marker-red.png",
         "width":  50,
         "height": 50
       })
-      marker.infowindow render_to_string(:partial => '/welcome/map', :locals => { :object => job})
+      marker.infowindow render_to_string(:partial => '/common/mapInfo', :locals => { :object => job})
     end
 	end
 
 	def set_position
+    coord = Geocoder.coordinates(@search)
 		@hash = Gmaps4rails.build_markers(@search) do |search, marker|
-      marker.lat @coord["lat"]
-      marker.lng @coord["lng"]
+      marker.lat coord[0]
+      marker.lng coord[1]
       marker.picture({
-        "url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/32/map-marker-icon.png",
+        "url": "marker-red.png",
         "width":  0,
         "height": 0
       })

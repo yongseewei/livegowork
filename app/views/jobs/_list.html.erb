@@ -1,6 +1,7 @@
 <%= javascript_tag do%>
 	markerabc = (<%=raw @hash.to_json %>);
 	zoom = (<%=raw 13.to_json%>)
+	center_build = (<%=raw Geocoder.coordinates(@search).to_json%>)
 <% end %>
 <div id = "list_job">
 	<% object.each do |job| %>

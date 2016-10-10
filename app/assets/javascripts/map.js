@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on("turbolinks:load",function(){
 
 	handler = Gmaps.build('Google');
 
@@ -7,6 +7,7 @@ $(document).ready(function(){
 	  handler.bounds.extendWith(markers);
 	  handler.fitMapToBounds();
 	  handler.getMap().setZoom(zoom);
+	  handler.map.centerOn(center_build)
 	  google.maps.event.addListener(handler.getMap(), 'zoom_changed', function(e) {
 	  	map_ajax();
 	  })
@@ -14,7 +15,26 @@ $(document).ready(function(){
 	  	map_ajax();
 	  })
 	});
-	
+
+	$(document).on("mouseover","#list_job a",function(event){
+		var index = $(this).parent().children("a").index($(this))
+		markers[index].setMap(null);
+    handler.removeMarker(markers[index]);
+    gr = {
+	      "lat": markerabc[index].lat,
+	      "lng": markerabc[index].lng,
+	      "picture": {
+	        "url": "marker-blue.png","width":  50,"height": 50     
+	      }
+	    }
+    gr.marker = handler.addMarker(gr);
+	}).on("mouseout","#list_job a",function(event){
+		var index = $(this).parent().children("a").index($(this))
+		handler.removeMarker(gr.marker);
+   	markers[index] = handler.addMarker(markerabc[index]);
+	})
+
+
 	function map_ajax(){
 		$.ajax({
   		type: 'POST',
@@ -42,7 +62,7 @@ $(document).ready(function(){
 	}
 
 	function zoom_to_radius(){
-		return Math.exp((14.24 - handler.map.serviceObject.zoom)*Math.log(2))
+		return 1.74*Math.exp((14.24 - handler.map.serviceObject.zoom)*Math.log(2))
 	}
 
 	function max_price(){
