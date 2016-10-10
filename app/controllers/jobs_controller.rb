@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   include JobsHelper
   before_action :find_job, only: [:show, :edit, :destroy, :update]
+
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
     @jobs = Job.near(@search,2.33)

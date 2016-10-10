@@ -13,22 +13,26 @@ before_action :find_review, only: [:show]
 	end
 
 	def create
-    @review = current_user.reviews.new(review_params)
+		
+    @review = Review.new(review_params)
     
     if @review.save
-       redirect_to root_url
+    	reviewee = @review.reviewee
+       redirect_to reviewee
     else
       render :new
+    end
 	end
 
 	def find_review
 		@review = Review.find(params[:id])
 	end
 
+
 private
 
   def review_params
-    params.require(:review).permit(:reviewer_id, :reviewee_id, :score)
+    params.require(:review).permit(:reviewer_id, :reviewee_id, :score, :comments)
   end
 
 end
