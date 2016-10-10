@@ -4,12 +4,18 @@ class User < ActiveRecord::Base
   has_many :jobs, dependent: :destroy #remove a user post if the account is deleted
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy #if either one user is deleted, the post is deleted as well
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy #active relationship is when you are following someone. Passive relationship is when someone is following you.
-  
-  has_many :following, through: :active_relationships, source: :followed 
+
+  has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :job_applications, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+
+  has_many :authentications, :dependent => :destroy
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, :default_style => :normal
+  # default_url: ":style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   #helper method
   def show
@@ -35,10 +41,7 @@ class User < ActiveRecord::Base
 		JobApplication.find_by(user_id: self.id, job_id: job.id)
 	end
 
-  has_many :authentications, :dependent => :destroy
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def self.create_with_auth_and_hash(authentication,auth_hash)
 
