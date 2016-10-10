@@ -270,5 +270,14 @@ ul.photo-gallery-list {
     width: 210px;
 }
 
+#user-review-count {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
 
-
+#user-container {
+    height: calc(100% - 50px);
+    overflow: auto;
+}

@@ -9,9 +9,13 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :job_applications, :dependent => :destroy
+
   has_many :reviews, :dependent => :destroy
   has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
   has_many :reviews, foreign_key: "reviewee_id", dependent: :destroy
+
+  has_many :skills, through: :user_skills
+  has_many :user_skills
 
   # ratyrate_rateable 'score'
   # ratyrate_rater
