@@ -11,12 +11,13 @@ var navigation = responsiveNav("#nav");
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand mybrand" href="/">Live Go Work</a>
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
 
               <li><%= link_to "Home",root_path%></li>
-              
+
               <% if signed_in? %>
                 <li><%= link_to "New Job", new_job_path %></li>
 
