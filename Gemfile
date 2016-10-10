@@ -45,6 +45,8 @@ gem 'faker'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'mini_magick'
 
+gem 'gon', '~> 5.1.2'
+gem 'geocomplete_rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

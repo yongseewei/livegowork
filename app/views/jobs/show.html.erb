@@ -11,10 +11,6 @@
 		<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>
 		<p><%= link_to 'View applicants', job_job_applications_path(@job) %></p>
 	<% else %>
-		<%= form_for [@job, @job_application], method: :post do |f| %>
-			<%= f.hidden_field :job_id, value: @job.id %>
-			<%= f.hidden_field :user_id, value: current_user.id %>
-			<%= f.submit "Apply now" %>
-		<% end %>
+		<%= render 'jobs/jobapplication' %>
 	<% end %>
 <% end %>

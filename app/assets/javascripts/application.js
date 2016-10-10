@@ -17,5 +17,15 @@
 //= require underscore
 //= require gmaps/google
 //= require bootstrap-sprockets
+//= require geocomplete
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  if ($("#error-message-job_applications").length){ 	
+  	var listing = "/jobs/" + $("#error-message-job_applications").attr("data-id")
+		window.history.pushState("object or string", "Title", listing);		
+	}
+
+	$("#query").geocomplete();
+});
