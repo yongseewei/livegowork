@@ -1,3 +1,5 @@
+<h1> Hi there <%= current_user.full_name %></h1>
+
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 
@@ -5,9 +7,30 @@
 
 <p> <%= @user.review_score.to_f %> </p>
 
-<% @user.review.each do |review| %>
-	<p> <%= review.score %> </p>
-	<p> <%= review.comments %> </p>
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
+	<p> How was this employee? </p>
+    <%= render partial: 'review_form' %>
+<% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
+  <p> How was this employer? </p>
+    <%= render partial: 'review_form' %>
+  <% else %>
+<% end %>
+ 
+
+<% @user.review.order('created_at DESC').each do |review| %>
+  <div class="container">
+    Rating: 
+    <div id="stars_<%= review.id %>"></div>
+    Comments: <%= review.comments %>
+  </div>
+  -------------------------------------
+  <script>
+    $('#stars_<%= review.id %>').raty({
+      path: '/assets',
+      readOnly: true,
+      score: <%= review.score %>
+    });
+  </script>
 <% end %>
 
 <div class="panel panel-default"><div>
