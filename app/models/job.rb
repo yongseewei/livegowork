@@ -8,6 +8,8 @@ class Job < ActiveRecord::Base
 	geocoded_by :location
 	after_validation :geocode
 
+	mount_uploaders :images, ImageUploader
+
 	# validates :avatars, presence: true
 	
 	# has_many :skills, through: :job_skills
