@@ -11,17 +11,13 @@ var navigation = responsiveNav("#nav");
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand mybrand" href="/">Live Go Work</a>
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
 
               <li><%= link_to "Home",root_path%></li>
-              <%= form_tag "/jobs",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
-                <div class="form-group" style="background-color:white;" >
-                  <%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search", autocomplete: "off", :autofocus=>true}  %>
-                </div>
-                <%= submit_tag "Search", {class: "btn btn-default"} %>
-              <% end %>
+
               <% if signed_in? %>
                 <li><%= link_to "New Job", new_job_path %></li>
 
