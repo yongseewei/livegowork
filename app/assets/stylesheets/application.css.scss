@@ -19,4 +19,11 @@
 @import "bootstrap";
 @import "bootstrap-social";
 @import 'font-awesome';
+@import 'https://fonts.googleapis.com/css?family=Pacifico|Raleway';
 @import "*";
+
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
