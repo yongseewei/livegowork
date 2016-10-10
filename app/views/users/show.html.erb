@@ -1,11 +1,77 @@
-<h1> Hi there <%= current_user.full_name %></h1>
+<p> logged in as <%= current_user.full_name %></p>
 
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img src="http://api.randomuser.me/portraits/men/1.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
+              <ul class="list-inline ratings text-center" title="Ratings">
+                
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+              </ul>
+            </div>
+            <!--/col--> 
+            <div class="col-md-4">
+              <h2><%= @user.full_name %></h2>
+              <p><strong>About: </strong>  </p>
 
-<p> <%= @user.full_name %> </p>
+              <p><strong>Skills: </strong>
+                <span class="label label-info tags">html5</span> 
+                <span class="label label-info tags">css3</span>
+                <span class="label label-info tags">jquery</span>
+                <span class="label label-info tags">bootstrap3</span>
+              </p>
+            </div>
 
-<p> <%= @user.review_score.to_f %> </p>
+            <div class="col-md-4">
+              <img src="/big-star.png" alt="" class="center-block" id="big-star" >
+              <div class="center" id="user-score"> <%= @user.review_score %> </div>     
+            </div>
+            
+
+
+            <!--/col-->          
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong> <%= @user.followers.count %> </strong></h2>
+              <p><small>Followers</small></p>
+              <%= render "/components/follow_button_big", :user => @user %>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong><%= @user.following.count %></strong></h2>
+              <p><small>Following</small></p>
+              <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+              <h2><strong><%= @user.review.count %></strong></h2>
+              <p><small>Reviews</small></p>
+              <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Options </button>  
+            </div>
+            <!--/col-->
+          </div>
+          <!--/row-->
+        </div>
+        <!--/panel-body-->
+      </div>
+      <!--/panel-->
+    </div>
+    <!--/col--> 
+  </div>
+  <!--/row--> 
+</div>
+<!--/container-->
+
+
+
 
 <% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
 	<p> How was this employee? </p>
@@ -23,7 +89,7 @@
     <div id="stars_<%= review.id %>"></div>
     Comments: <%= review.comments %>
   </div>
-  -------------------------------------
+
   <script>
     $('#stars_<%= review.id %>').raty({
       path: '/assets',
@@ -32,10 +98,3 @@
     });
   </script>
 <% end %>
-
-<div class="panel panel-default"><div>
-<div class="panel"></div>
-
-<h6> <%= current_user.followers.count %></h6>
-<%= render "/components/follow_button", :user => @user %>
-
