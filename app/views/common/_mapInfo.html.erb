@@ -1,2 +1,11 @@
-<p>Hello</p>
-<p><%= object.title %></p>
+<%= link_to job_path(object) do%>
+	<span class="job-span"></span> 
+<% end %>
+<h4 class="text-center"><%= object.title %></h4>
+<p class="text-center"><%= object.description %></p>
+<p class="text-center"><%= object.location.split.map(&:capitalize).join(' ') %></p>
+<div class = "col-md-4">
+	<% if object.images.first != nil %>
+		<%= link_to (image_tag object.images.first.url(:thumb)), object %>
+	<% end %>
+</div>
