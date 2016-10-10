@@ -1,4 +1,5 @@
 <ul> 
+	<li> posted by <%= @job.user.full_name %> </li>
 	<li> <%= @job.title %> </li>
 	<li> <%= @job.description %> </li>
 	<li> <%= @job.location %> </li>
@@ -6,12 +7,17 @@
 </ul>
 
 <% if signed_in? %>	
-	<% if current_user.jobs.find_by(id: params[:id]) %>
+	<% if current_user.jobs.find_by(id: params[:id]) && !@job.confirmed? %>
 		<p><%= link_to 'Remove this job', job_path(@job), method: :delete %></p>
 		<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>
 		<p><%= link_to 'View applicants', job_job_applications_path(@job) %></p>
+	<% elsif current_user.applied?(@job) %>
+		<p> Thanks for your interest in this job! You'll hear if you were successful soon. </p>
+<!-- 
+	<% elsif @job.confirmed? %>
+		<p>  -->
 	<% else %>
-		<%= form_for [@job, @job_application], method: :post do |f| %>
+			<%= form_for [@job, @job_application], method: :post do |f| %>
 			<%= f.hidden_field :job_id, value: @job.id %>
 			<%= f.hidden_field :user_id, value: current_user.id %>
 			<%= f.submit "Apply now" %>

@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :job_applications, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+  has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
+  has_many :reviews, foreign_key: "reviewee_id", dependent: :destroy
 
   # ratyrate_rateable 'score'
   # ratyrate_rater

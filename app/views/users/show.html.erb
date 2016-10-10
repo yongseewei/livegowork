@@ -1,3 +1,5 @@
+<h1> Hi there <%= current_user.full_name %></h1>
+
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 
@@ -5,37 +7,33 @@
 
 <p> <%= @user.review_score.to_f %> </p>
 
-<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) || @user.posted_job?(@user) && @user.taken_job? || current_user.taken_job? %>
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job? %>
 	<p> Review this user </p>
+    <% @review = Review.new %>	
+    <%= form_for @review do |form| %>
+      <div class="text-field">
+      <%= form.label :"Score" %>		
+      <%= form.hidden_field :reviewee_id, :value => @user.id %>
+  		<%= form.hidden_field :reviewer_id, :value => current_user.id %>
+      </div>
+      <div id="user_stars"></div>
+      <div class="text-field">
+        <%= form.label :"Comments" %>
+        <%= form.text_area :comments, type: 'text', :required => true, class: 'form-control' %>
+      </div>
+      
+    <%= form.submit "Submit Review", class: "btn btn-primary" %>
+    <% end %>
+      <script>
+        $('#user_stars').raty({
+          path: '/assets',
+          scoreName: 'review[score]',
+          score: 1
+        });
+      </script>
 
-
-<% @review = Review.new %>	
-<%= form_for @review do |form| %>
-  <div class="text-field">
-    <%= form.label :"Score" %>
-    <%= form.text_field :score, type: 'integer', :required => true, class: 'form-control' %>
-		
-    <%= form.hidden_field :reviewee_id, :value => @user.id %>
-		<%= form.hidden_field :reviewer_id, :value => current_user.id %>
-  </div>
-  <div id="user_stars"></div>
-  <div class="text-field">
-    <%= form.label :"Comments" %>
-    <%= form.text_area :comments, type: 'text', :required => true, class: 'form-control' %>
-  </div>
-  
-  <%= form.submit "Submit Review", class: "btn btn-primary" %>
-  <% end %>
-  <script>
-    $('#user_stars').raty({
-      path: '/assets',
-      scoreName: 'review[score]',
-      score: 1
-    });
-  </script>
-
-	<% else %>
-
+	 <% else %>
+   <p> You can't review this user yet. </p>
 	<% end %>
  
 

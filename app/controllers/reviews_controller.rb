@@ -17,7 +17,8 @@ before_action :find_review, only: [:show]
     @review = Review.new(review_params)
     
     if @review.save
-       redirect_to user_path(current_user)
+    	reviewee = @review.reviewee
+       redirect_to reviewee
     else
       render :new
     end
