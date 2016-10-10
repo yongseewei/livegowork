@@ -29,7 +29,7 @@ gem 'clearance'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails'
-gem 'yelp'
+
 
 #facebook login
 gem 'omniauth'

@@ -5,8 +5,9 @@
 
 <p> <%= @user.review_score.to_f %> </p>
 
-<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job? %>
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) || @user.posted_job?(@user) && @user.taken_job? || current_user.taken_job? %>
 	<p> Review this user </p>
+
 
 <% @review = Review.new %>	
 <%= form_for @review do |form| %>
@@ -34,7 +35,7 @@
   </script>
 
 	<% else %>
-	<p> You can't review this person yet </p>
+
 	<% end %>
  
 
@@ -42,7 +43,7 @@
   <div class="container">
     Rating: 
     <div id="stars_<%= review.id %>"></div>
-    Event Title: <%= review.score %> <br>
+    Score: <%= review.score %> <br>
     Comments: <%= review.comments %>
   </div>
   -------------------------------------
