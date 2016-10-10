@@ -87,8 +87,9 @@ class User < ActiveRecord::Base
     Review.where(reviewer_id: user.id, reviewee_id: self.id).any?
   end
 
-  def taken_job?
-    JobApplication.where(user_id: self.id, confirmed: true).any?
+  def taken_job?(user)
+    
+    JobApplication.where(user_id: user.id, confirmed: true).any?
   end
 
   def posted_job?(user)

@@ -7,41 +7,20 @@
 
 <p> <%= @user.review_score.to_f %> </p>
 
-<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job? %>
-	<p> Review this user </p>
-    <% @review = Review.new %>	
-    <%= form_for @review do |form| %>
-      <div class="text-field">
-      <%= form.label :"Score" %>		
-      <%= form.hidden_field :reviewee_id, :value => @user.id %>
-  		<%= form.hidden_field :reviewer_id, :value => current_user.id %>
-      </div>
-      <div id="user_stars"></div>
-      <div class="text-field">
-        <%= form.label :"Comments" %>
-        <%= form.text_area :comments, type: 'text', :required => true, class: 'form-control' %>
-      </div>
-      
-    <%= form.submit "Submit Review", class: "btn btn-primary" %>
-    <% end %>
-      <script>
-        $('#user_stars').raty({
-          path: '/assets',
-          scoreName: 'review[score]',
-          score: 1
-        });
-      </script>
-
-	 <% else %>
-   <p> You can't review this user yet. </p>
-	<% end %>
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
+	<p> How was this employee? </p>
+    <%= render partial: 'review_form' %>
+<% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
+  <p> How was this employer? </p>
+    <%= render partial: 'review_form' %>
+  <% else %>
+<% end %>
  
 
 <% @user.review.order('created_at DESC').each do |review| %>
   <div class="container">
     Rating: 
     <div id="stars_<%= review.id %>"></div>
-    Score: <%= review.score %> <br>
     Comments: <%= review.comments %>
   </div>
   -------------------------------------
