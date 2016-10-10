@@ -5,7 +5,14 @@
 <% end %>
 <div id = "list_job">
 	<% object.each do |job| %>
-		<%= link_to job.title, job_path(job) unless job.confirmed? && current_user.id != job.user_id %>
-		<br><br>	
+		<div class="box panel panel-default">
+			<div class="panel-body">
+				<%= link_to job_path(job) do%>
+					<span class="job-span"></span> 
+				<% end %>
+				<p><%= job.title %></p>
+				<p class="user">Posted by: <%= job.user.email %></p>
+			</div>
+		</div>
 	<% end %>
 </div>	

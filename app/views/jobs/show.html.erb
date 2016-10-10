@@ -1,16 +1,39 @@
-<ul> 
+<div id="job_show" class="row" >
+	<div class="col-md-10 col-md-offset-1">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-md-8">
+						<h1><%=	@job.title %></h1>
+							<p class="description"><%= simple_format(@job.description) %></p>
+						</div>
+						<% if signed_in? && !current_user.jobs.find_by(id: params[:id])  %>
+							<%= render 'jobs/jobapplication' %>
+						<% end %>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-md-6">
+									<p class="user">Posted by: <%= @job.user.email %></p>
+								</div>
+								<div class="col-md-6">
+									<div class="btn-group pull-right">
+										<% if signed_in? && current_user.jobs.find_by(id: params[:id])  %>
+											<%= link_to "View applicants", job_job_applications_path(@job), class: "btn btn-default" %>
+											<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default" %>
+											<%= link_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
+										<% end %>
+									</div>	
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <ul> 
 	<li> <%= @job.title %> </li>
 	<li> <%= @job.description %> </li>
 	<li> <%= @job.location %> </li>
 	<li> <%= @job.salary %> </li>
-</ul>
-
-<% if signed_in? %>	
-	<% if current_user.jobs.find_by(id: params[:id]) %>
-		<p><%= link_to 'Remove this job', job_path(@job), method: :delete %></p>
-		<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>
-		<p><%= link_to 'View applicants', job_job_applications_path(@job) %></p>
-	<% else %>
-		<%= render 'jobs/jobapplication' %>
-	<% end %>
-<% end %>
+</ul> -->

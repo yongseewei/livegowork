@@ -1,4 +1,5 @@
 $(document).on("turbolinks:load",function(){
+	$("#query").geocomplete();
 
 	handler = Gmaps.build('Google');
 
@@ -16,8 +17,9 @@ $(document).on("turbolinks:load",function(){
 	  })
 	});
 
-	$(document).on("mouseover","#list_job a",function(event){
-		var index = $(this).parent().children("a").index($(this))
+	$(document).on("mouseover","#list_job .box",function(event){
+		// debugger
+		var index = $(this).index();
 		markers[index].setMap(null);
     handler.removeMarker(markers[index]);
     gr = {
@@ -28,8 +30,8 @@ $(document).on("turbolinks:load",function(){
 	      }
 	    }
     gr.marker = handler.addMarker(gr);
-	}).on("mouseout","#list_job a",function(event){
-		var index = $(this).parent().children("a").index($(this))
+	}).on("mouseout","#list_job .box",function(event){
+		var index = $(this).index()
 		handler.removeMarker(gr.marker);
    	markers[index] = handler.addMarker(markerabc[index]);
 	})

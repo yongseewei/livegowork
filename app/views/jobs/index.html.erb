@@ -1,13 +1,14 @@
-<div class="row" style='margin: 0px'> 
-	<div class="col-md-6">
-	<h1>Jobs#index</h1>
+<div id="job-index-content" class="row" style='margin: 0px'> 
+	<div class="col-md-6" id="left-job-index">
+
 		<div id="sidebar-wrapper">
+			<h1>Jobs#index</h1>
 			<%= render 'slider' %>
   	</div>
-  	<br>
-		<div class="main">
-			<h2> all jobs </h2>		
-    	<br>
+  	<div class="spacer">
+		  &nbsp;
+		</div>
+		<div class="job-lists">	
 			<%= render 'list', :object => @jobs %>
 		</div>
 	</div>

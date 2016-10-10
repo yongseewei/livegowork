@@ -26,6 +26,4 @@ $(document).ready(function(){
   	var listing = "/jobs/" + $("#error-message-job_applications").attr("data-id")
 		window.history.pushState("object or string", "Title", listing);		
 	}
-
-	$("#query").geocomplete();
 });
