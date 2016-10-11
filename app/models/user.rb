@@ -12,16 +12,17 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: :recipient_id
 
   has_many :job_applications, :dependent => :destroy
+
   has_many :reviews, :dependent => :destroy
   has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
   has_many :reviews, foreign_key: "reviewee_id", dependent: :destroy
 
-  # ratyrate_rateable 'score'
-  # ratyrate_rater
+  has_many :skills, through: :user_skills
+  has_many :user_skills
 
   has_many :authentications, :dependent => :destroy
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "140x140#", thumb: "100x100#" ,small_thumb: "50x50#"}, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
 
