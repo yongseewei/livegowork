@@ -22,8 +22,9 @@
   <script>
     //var navigation = responsiveNav("#nav");
   </script>
-  <%= render "common/nav" %>
- 
+  <header>
+    <%= render "common/nav" %>
+  </header>
   <div id="flash">
     <% flash.each do |key, value| %>
       <div class="flash <%= key %>"><%= value %></div>
