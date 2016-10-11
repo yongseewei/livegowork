@@ -1,10 +1,51 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<div class="container" id="sign-page">
+  <div id="sign-boxs">
+    <div id="clearance" class="sign-in">
+      <h4><%= t(".title") %></h4>
 
-  <%= render partial: '/sessions/form' %>
+			<%= form_for :session, url: session_path do |form| %>
 
+			  <div class="text-field">  
+			  	<%= form.label :Email %><br>
+			  	 <span class="glyphicon glyphicon-envelope"></span>
+			    <%= form.text_field :email, type: 'email', placeholder:"Email" %>
+			  </div><br>
 
+			  <div class="password-field">
+			  	<%= form.label :Password %><br>
+			  	<span class="glyphicon glyphicon-lock"></span>
+			    <%= form.password_field :password, placeholder:"Password" %>
+			  </div><br>
 
+			  <div class="submit-field"
+			    <%= form.submit %>
+			  </div>
 
+			  <div class="other-links">
+    			<%= link_to t(".forgot_password"), new_password_path %>
+  				</div><br>
 
+  			 <p align="center">
+			  <h5> Not a member yet? </h5>
+			 </p><br>
+
+			  <div class="other-links">
+			  <% if Clearance.configuration.allow_sign_up? %>
+    				<button render="/sign_up" class="btn btn-block btn-social btn-lg btn-facebook">
+          				<i class="glyphicon glyphicon-pencil" >
+            				</i> Sign up with Email</button>
+   					<% end %>
+  				</div>
+			<% end %>
+
+	    <h4>
+	      ----------------- or -------------------------
+	    </h4>
+			
+		<a href="/auth/facebook" title="Facebook" class="btn btn-block btn-social btn-lg btn-facebook">
+            <i class="fa fa-facebook"
+				"></i> Connect to Facebook
+        </a>
+		</div>
+  </div>
 </div>

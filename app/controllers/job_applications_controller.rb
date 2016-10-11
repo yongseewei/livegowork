@@ -1,5 +1,5 @@
 class JobApplicationsController < ApplicationController
-
+  include JobsHelper
   before_action :find_job_application, only: [:show, :destroy, :update]
  	def new 
  		@job_application = JobApplication.new
@@ -13,16 +13,19 @@ class JobApplicationsController < ApplicationController
 	end
 
 	def create
-		@job_application = JobApplication.new(job_application_params)
-			if @job_application.save
-				# job_id = @job_application.job_id
-				# @job = Job.find(job_id)
-				flash[:success] = "Thanks for your interest in this job! You will hear if you were successful soon."
-				# JobApplicationMailer.delay_for(2.seconds).confirmation_email(current_user, @job, @job_application)
-	      redirect_to @job_application.job
-	  	else
-	    	redirect_to job_path(params[:job_application][:job_id])
-	  	end
+
+		@job_application = current_user.job_applications.new(job_application_params)
+		@job = @job_application.job
+		if @job_application.save
+			# job_id = @job_application.job_id
+			# @job = Job.find(job_id)
+			flash[:success] = "Thanks for your interest in this job! You will hear if you were successful soon."
+			# JobApplicationMailer.delay_for(2.seconds).confirmation_email(current_user, @job, @job_application)
+      redirect_to @job_application.job
+  	else
+  		gon.reservations = taken_date
+  		render 'jobs/show'
+  	end
 	end
 
 	def update 	
@@ -43,6 +46,6 @@ class JobApplicationsController < ApplicationController
 	private
 
   def job_application_params
-    params.require(:job_application).permit(:user_id, :job_id, :job_application_id)
+    params.require(:job_application).permit( :job_id, :end_date, :start_date)
   end
 end

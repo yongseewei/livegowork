@@ -10,10 +10,15 @@ class User < ActiveRecord::Base
 
   has_many :job_applications, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+  has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
+  has_many :reviews, foreign_key: "reviewee_id", dependent: :destroy
+
+  # ratyrate_rateable 'score'
+  # ratyrate_rater
 
   has_many :authentications, :dependent => :destroy
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "50x50>"}, default_url: "missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
 
@@ -78,6 +83,19 @@ class User < ActiveRecord::Base
 
   def review
     Review.where(reviewee_id: self.id)
+  end
+
+  def check_if_reviewed?(user)
+    Review.where(reviewer_id: user.id, reviewee_id: self.id).any?
+  end
+
+  def taken_job?(user)
+    
+    JobApplication.where(user_id: user.id, confirmed: true).any?
+  end
+
+  def posted_job?(user)
+    Job.where(user_id: user.id).any?
   end
 
   def full_name
