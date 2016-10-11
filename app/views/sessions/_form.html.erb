@@ -16,6 +16,10 @@
   </p>
   </div><br>
 
+  <div >
+    <%= form.hidden_field :this_url, value: request.path_info  %>
+  </div>
+
   <div class="submit-field">
   <p align="center">
     <%= form.submit %>

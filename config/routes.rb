@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :reviews
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
-  resource :session, controller: "clearance/sessions", only: [:create]
+  resource :session, controller: "sessions", only: [:create]
 
 # devise_for :users
 
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy]
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+  delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
 
 
