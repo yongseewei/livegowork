@@ -1,40 +1,32 @@
+<div class="container-fluid">
 
-<div id="job_show" class="row" >
-	<div class="col-md-10 col-md-offset-1">
-		<div class="panel panel-default">
-			<div class="panel-heading list_image text-center">
-				<% if @job.images.first != nil %>
- 					<%= render 'jobs/carousel' %>
- 				<% end %>
-			</div>
-			<div class="panel-body">
-				<div class="row-fluid">
-					<div class="col-md-8">
-						<h1><%=	@job.title %></h1>
-							<p class="description"><%= simple_format(@job.description) %></p>
-						</div>
-						<% if signed_in? && !current_user.jobs.find_by(id: params[:id])  %>
-							<%= render 'jobs/jobapplication' %>
-						<% end %>
-						<div class="panel-footer">
-							<div class="row">
-								<div class="col-md-6">
-									<p class="user">Posted by: <%= @job.user.email %></p>
-								</div>
-								<div class="col-md-6">
-									<div class="btn-group pull-right">
-										<% if signed_in? && current_user.jobs.find_by(id: params[:id])  %>
-											<%= link_to "View applicants", job_job_applications_path(@job), class: "btn btn-default" %>
-											<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default" %>
-											<%= link_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
-										<% end %>
-									</div>	
-								</div>
-							</div>
-						</div>
+	
+</div>
+
+
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="panel panel-default">
+					<div class="panel-heading"><h1><%=	@job.title %></h1></div>
+						<div class="panel-body"><p class="description"><%= simple_format(@job.description) %></p></div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+					<address>
+						 <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
+					</address>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
