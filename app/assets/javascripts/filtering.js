@@ -14,6 +14,7 @@ $(function() {
 			$(this).parent().submit();
 		}
 	});
+
 	$("#price-filter").submit(function(event){
 		$.ajax({
 			type: 'POST',
@@ -21,16 +22,44 @@ $(function() {
 			data: $(this).serialize(),
 			dataType: "script",
 			success: function(msg) {
-				for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-          handler.removeMarkers(markers);
-        }
-        markers = [];
-        markers = handler.addMarkers(markerabc);
-        handler.bounds.extendWith(markers);
+				redraw_marker()
 			}
 		});
 	});
+
+	$(document).on("submit","#search-submit2",function(event){
+		var data = {filter_price2: {min: $("#slider-range").slider("values", 0),max: max_price() }}
+		$.ajax({
+			type: 'GET',
+			url: $(this).attr('action'),
+			data: $(this).serialize() + '&' + $.param(data),
+			dataType: "script",
+			success: function(msg) {
+        redraw_marker();
+         handler.getMap().setZoom(13);
+      }
+		});
+	});
+
+	function redraw_marker(){
+		for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+      handler.removeMarkers(markers);
+    }
+    markers = [];
+    markers = handler.addMarkers(markerabc);
+    handler.bounds.extendWith(markers);
+	}
+
+	function max_price(){
+		var max = $("#slider-range").slider("values", 1) 
+		if (max == "500"){
+			return "9999"
+		}else{
+			return max
+		}
+	}
+
 	$( "#amount" ).val( "RM" + $( "#slider-range" ).slider( "values", 0 ) +
 	  " - RM" + $( "#slider-range" ).slider( "values", 1 ) );
 });

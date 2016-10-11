@@ -15,7 +15,11 @@ class UsersController < Clearance::UsersController
       sign_in @user
       redirect_back_or url_after_create
     else
-      render template: "users/new"
+      flash[:notice] = @user.errors.full_messages.join(" , ")
+      respond_to do |format|
+        format.js 
+      end
+      flash.clear
     end
   end
 

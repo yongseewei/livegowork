@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 	if($("#show_error .flash").length){
 		$("#show_error").slideDown(1000);
-		setTimeout(function() { $("#show_error").slideUp(1000); }, 5000);
+		setTimeout(function() { $("#show_error").slideUp(1000); }, 3000);
 	}
 });
 

@@ -3,9 +3,18 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :destroy, :update]
 
   def index
+    # byebug
   	@search = params[:query].presence || "Kuala Lumpur"
     @jobs = Job.near(@search,8)
+    filtering_params(params).each do |key, value|
+      # byebug
+      @jobs = @jobs.public_send(key, value) if value.present?
+    end
     @jobs.length == 0 ? set_position : set_marker
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def filter
@@ -28,7 +37,7 @@ class JobsController < ApplicationController
   def create   
     @job = current_user.jobs.new(job_params)
     if @job.save
-       redirect_to @job, notice: "Successfully create new job!"
+      redirect_to @job, notice: "Successfully create new job!"
     else
       render :new
     end
@@ -61,7 +70,7 @@ class JobsController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:filter_map, :filter_price)
+    params.slice(:filter_map, :filter_price,:filter_price2)
   end
 end
 

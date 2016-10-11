@@ -4,7 +4,7 @@ class Job < ActiveRecord::Base
 
   scope :salary_range, ->(min, max, id) { where(salary: min..max, id: id)}
   scope :filter_map, ->(loc) { where(salary: loc[:min]..loc[:max]).near([loc[:lat],loc[:lng]],loc[:zoom])}
-
+  scope :filter_price2, ->(loc) {where(salary: loc[:min]..loc[:max])}
 	geocoded_by :location
 	after_validation :geocode
 

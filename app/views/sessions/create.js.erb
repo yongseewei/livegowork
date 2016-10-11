@@ -1,0 +1,3 @@
+$('#show_error').html("<% flash.each do |key, value| %>");
+$('#show_error').append('<div class="flash <%= key %>"><%= value %></div>');
+$('#show_error').append(" <% end %>")

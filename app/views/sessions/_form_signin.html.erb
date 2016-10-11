@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <%= form_for :session, url: session_path do |form| %>
+    <%= form_for :session, url: session_path, :html => {class: "sign-in-form"},remote: true do |form| %>
       <br>
       <div class="input-group">   
         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
