@@ -23,8 +23,10 @@ var navigation = responsiveNav("#nav");
 
                 <li><%= link_to "Sign out", sign_out_path, id: "sign_out", method: :delete %></li>
 
-                <li class="round-image-50">
-                  <%= image_tag current_user.avatar.url(:small_thumb), class: "ratio img-responsive img-circle" %>
+                <li >
+                <%= link_to user_path(current_user) do%>
+                <img src="<%= current_user.avatar.url(:small_thumb) %>" class="img-circle my-imgcircle">
+                <% end %>
                 </li>
                <% else %>
                 <li><a data-toggle="modal" href="#myModal" data-target="#myModal">Sign In/Sign Up</a></li>
