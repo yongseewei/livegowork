@@ -3,7 +3,6 @@ class BotsController < ApplicationController
 
 	def create
 		@message = current_user.messages.build(bot_params)
-		byebug
   	@message.save
 	end
 
