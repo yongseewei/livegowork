@@ -55,6 +55,9 @@ gem 'ratyrate'
 
 # Use ratyrate for star ratings
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'  
+gem 'private_pub'
+gem 'thin'
+gem 'api-ai-ruby', '~> 1.2', '>= 1.2.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

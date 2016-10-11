@@ -1,0 +1,15 @@
+<li class="<%=  self_or_other(message) %>">
+  <div class="avatar">
+	  <% if message.status == "bot" %>
+	    <img src="https://az705183.vo.msecnd.net/dam/skype/media/concierge-assets/avatar/avatarcnsrg-800.png" />
+	  <% else %>
+	  	<%= image_tag current_user.avatar.url(:thumb)%>
+	  <% end %>
+  </div>
+  <div class="chatboxmessagecontent">
+    <p><%= message.body %></p>
+    <time datetime="<%= message.created_at %>" title="<%= message.created_at.strftime("%d %b  %Y at %I:%M%p") %>">
+      <%= message.status == "bot" ? "bot" : message.user.first_name %> • <%= message.created_at.getlocal.strftime("%H:%M %p") %>
+    </time>
+  </div>
+</li>

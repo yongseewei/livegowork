@@ -1,0 +1,19 @@
+<% publish_to "/messages/new" do %>
+	var id = "<%= current_user.id %>";
+	var chatbox = $("#chatbox_id"+ id + " .chatbox .chatboxcontent");
+	var message_id = "<%= @message.user.id %>";
+	var message = "<%= @message.body %>";
+	var user_id = "<%= current_user.id %>";
+
+	chatbox.append("<%= j render( partial: @message ) %>");
+	chatbox.scrollTop(chatbox[0].scrollHeight);
+
+	$.ajax({
+		type: "POST",
+		url: "/bots",
+		data: {'bot' :{ 'body' : message, 'status' : 'bot'}},
+		dataType: "json",
+		success: function(msg) {
+		}
+	})
+<% end %>
