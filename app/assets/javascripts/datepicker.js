@@ -27,10 +27,10 @@ $(document).ready(function(){
       var maxDate = new Date()
       minDate.setDate(minDate.getDate())
       maxDate.setDate(maxDate.getDate() + 180)
-      if (minDate < new Date( gon.reservations[1][0])){
+      if (gon.reservations[0][1] != null && minDate < new Date( gon.reservations[1][0])){
         minDate = new Date( gon.reservations[1][0]);
       }
-      if (maxDate > new Date( gon.reservations[1][1])){
+      if ( gon.reservations[1][1] != null && maxDate > new Date( gon.reservations[1][1])){
         maxDate = new Date( gon.reservations[1][1]);
       }
       return {
@@ -57,7 +57,7 @@ $(document).ready(function(){
         maxDate.setDate(maxDate.getDate() + 180)
       }
       minDate.setDate(minDate.getDate())
-      if (maxDate > new Date( gon.reservations[1][1])){
+      if (gon.reservations[1][1] != null && maxDate > new Date( gon.reservations[1][1])){
         maxDate = new Date( gon.reservations[1][1]);
       }
       maxDate.setDate(maxDate.getDate())
