@@ -22,12 +22,12 @@ var navigation = responsiveNav("#nav");
                 <li><%= link_to "New Job", new_job_path %></li>
 
                 <li><%= link_to "Sign out", sign_out_path, id: "sign_out", method: :delete %></li>
-                <li class="round-image-50">
-                  <%= image_tag current_user.avatar.url(:small_thumb) %>
+                <li>
+                  <%= image_tag current_user.avatar.url(:small_thumb), class: "ratio img-responsive img-circle" %>
                 </li>
               <% else %>
                 <li><a data-toggle="modal" href="#myModal" data-target="#myModal">Sign In</a></li>
-   
+
                 <li><%= link_to t(".sign_up"), sign_up_path %> </li>
               <% end %>
           </ul>

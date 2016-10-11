@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   end
 
   def taken_job?(user)
-    
+
     JobApplication.where(user_id: user.id, confirmed: true).any?
   end
 
