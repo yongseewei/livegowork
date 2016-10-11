@@ -1,7 +1,7 @@
 <% @review = Review.new %>	
     <%= form_for @review do |form| %>
       <div class="text-field">
-      <%= form.label :"Score" %>		
+	
       <%= form.hidden_field :reviewee_id, :value => @user.id %>
   		<%= form.hidden_field :reviewer_id, :value => current_user.id %>
       </div>

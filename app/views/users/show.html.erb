@@ -1,5 +1,5 @@
 <p> logged in as <%= current_user.full_name %></p>
-
+<div class="container">
 <div class="container" id="user-container">
   <div class="row">
     <div class="col-md-12">
@@ -7,7 +7,8 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-4 text-center">
-              <img src="http://api.randomuser.me/portraits/men/1.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
+            <%= image_tag current_user.avatar.url(:medium), class: "center-block img-circle img-thumbnail img-responsive" %>
+              
               <ul class="list-inline ratings text-center" title="Ratings">
                 
                 <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
@@ -65,6 +66,15 @@
                 reviews.
               <% end %> </p>
 
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
+  <p>Your score:</p>
+    <%= render partial: 'review_form' %>
+<% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
+  <p>Your score:</p>
+    <%= render partial: 'review_form' %>
+  <% else %>
+<% end %>
+
 
             </div>
             <!--/col-->
@@ -82,12 +92,10 @@
 <!--/container-->
 
 <% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
-  <p> How was this employee? </p>
-    <%= render partial: 'review_form' %>
+  <h1> Please leave a review for this employee above. </h1>
 <% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
-  <p> How was this employer? </p>
-    <%= render partial: 'review_form' %>
-  <% else %>
+<h1> Please leave a review for this employer above. </h1>
+     <% else %>
 <% end %>
 
 
@@ -103,7 +111,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 text-center">
-                  <img src="http://api.randomuser.me/portraits/men/3.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
+              <%= image_tag review.reviewer.avatar.url(:small_thumb), class: "center-block img-circle img-thumbnail img-responsive" %>
                   </div>
                     <p><strong>reviewed by: </strong> <%= review.reviewer.full_name %> </p>
                     <p><strong>comments: </strong> <%= review.comments %> </p>
@@ -123,4 +131,5 @@
     <% end %>
   </div>
   <% end %>
+</div>
 </div>

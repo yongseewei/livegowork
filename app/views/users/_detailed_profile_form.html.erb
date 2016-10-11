@@ -8,11 +8,13 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-        <img src="http://api.randomuser.me/portraits/men/1.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+        <%= image_tag current_user.avatar.url(:medium), class: "center-block img-circle img-thumbnail img-responsive" %>
         <h6>Upload a different photo...</h6>
 
 <%= form.file_field :avatar, class: "text-center center-block well well-sm" %>
-        
+
+<h3>What skills do you have?</h3>
+<p><%= form.collection_check_boxes(:skill_ids, Skill.all, :id, :skill, class: "checkbox") %></p>        
       
       </div>
     </div>
@@ -24,46 +26,37 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-        
-  <%= form.text_field :first_name, class:"form-control"%>
-
+            <%= form.text_field :first_name, class:"form-control"%>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-  
-  <%= form.text_field :last_name,class:"form-control" %>
-
+            <%= form.text_field :last_name,class:"form-control" %>
           </div>
         </div>
-        
+        <div class="form-group">
+          <label class="col-lg-3 control-label">about:</label>
+          <div class="col-lg-8">
+            <%= form.text_field :about, class:"form-control" %>
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-
-  <%= form.text_field :email, type: 'email',class:"form-control" %>
-
+            <%= form.text_field :email, type: 'email',class:"form-control" %>
           </div>
         </div>
-        
-        
         <div class="form-group">
           <label class="col-md-3 control-label">Password:</label>
           <div class="col-md-8">
-
-    <%= form.password_field :password,type: 'password',id:"exampleInputPassword1",class:"form-control" %>
-
+            <%= form.password_field :password,type: 'password',id:"exampleInputPassword1",class:"form-control" %>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-
-<p><%= form.collection_check_boxes(:skill_ids, Skill.all, :id, :skill) %></p>
-
-  <%= form.submit 'Save changes', class: "btn btn-primary" %>
-
+            <%= form.submit 'Save changes', class: "btn btn-primary" %>
             <span></span>
             <input class="btn btn-default" value="Cancel" type="reset">
           </div>
