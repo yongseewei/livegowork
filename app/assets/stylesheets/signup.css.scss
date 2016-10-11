@@ -7,7 +7,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 100%;
+  min-height: 110%;
   min-width: 800px;
   /* Set up proportionate scaling */
   width: 100%;
@@ -32,11 +32,41 @@
   margin-top: 200px;
   margin-right: 350px;
   width: 30em;
-  height: 38em;
+  height: 35em;
   align-items: center;
   background-color: rgba(white, 0.5);
 }
+
+
+#sign-boxs{
+  float :right;
+  margin-top: 150px;
+  margin-right: 220px;
+  width: 28em;
+  height: 32em;
+  align-items: center;
+  background-color: rgba(white, 0.8);
+}
+
+
+
+#sign-boxe{
+  float :right;
+  margin-top: 230px;
+  margin-right: 180px;
+  width: 32em;
+  height: 30em;
+  align-items: center;
+  background-color: rgba(white, 0.8);
+  padding-left: 20px;
+  padding-top: 20px;
+
+}
+
+
+
 .sign-up {
+
 
   padding-left: 55px;
 
@@ -45,7 +75,21 @@
 
 }
 
+.sign-in {
+
+  padding-left: 80px;
+
+  width: 25em;
+  
+}
+
 .btn.outline {
 	background: none;
-	padding: 12px 22px;
+	padding: 40px 50px;
+}
+
+.col-md-6 {
+  height: 30px;
+  padding-right: 8px;
+
 }
