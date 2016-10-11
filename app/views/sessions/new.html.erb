@@ -30,20 +30,21 @@
 			 </p><br>
 
 			  <div class="other-links">
-			  <span class="glyphicon glyphicon-pencil"></span>
-			    <% if Clearance.configuration.allow_sign_up? %>
-			      <button type="link_to t(".sign_up"), sign_up_path" class="btn btn-primary">Sign Up with Email</button>
-			    <% end %>
-			  </div>
+			  <% if Clearance.configuration.allow_sign_up? %>
+    				<button render="/sign_up" class="btn btn-block btn-social btn-lg btn-facebook">
+          				<i class="glyphicon glyphicon-pencil" >
+            				</i> Sign up with Email</button>
+   					<% end %>
+  				</div>
 			<% end %>
 
 	    <h4>
-	             or
+	      ----------------- or -------------------------
 	    </h4>
 			
 		<a href="/auth/facebook" title="Facebook" class="btn btn-block btn-social btn-lg btn-facebook">
             <i class="fa fa-facebook"
-				"></i> Connect Facebook
+				"></i> Connect to Facebook
         </a>
 		</div>
   </div>

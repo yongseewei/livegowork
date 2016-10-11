@@ -4,7 +4,7 @@ class JobsController < ApplicationController
 
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
-    @jobs = Job.near(@search,2.33)
+    @jobs = Job.near(@search,8)
     @jobs.length == 0 ? set_position : set_marker
   end
 
@@ -16,6 +16,8 @@ class JobsController < ApplicationController
   end
 
   def show
+    gon.reservations = taken_date
+    @images = @job.images.sample(4)
     @job_application = JobApplication.new
   end
 
@@ -55,7 +57,7 @@ class JobsController < ApplicationController
 
   private
   def job_params
-    params.require(:job).permit(:title, :description, :location, :salary, {avatars:[]}, {:tag_ids=>[]}, :user_id )
+    params.require(:job).permit(:title, :description, :location, :salary, :start_date,:end_date, {images: []}, {:tag_ids=>[]}, :user_id )
   end
 
   def filtering_params(params)

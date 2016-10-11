@@ -1,23 +1,31 @@
 <%= form_for :session, url: session_path do |form| %>
 
   <div class="text-field">
+  <p align="center">
     <%= form.label :Email %><br>
     <span class="glyphicon glyphicon-envelope"></span>
     <%= form.text_field :email, type: 'email', placeholder:"Email" %>
+  </p>
   </div><br>
 
   <div class="password-field">
+  <p align="center">
     <%= form.label :Password %><br>
     <span class="glyphicon glyphicon-lock"></span>
     <%= form.password_field :password, placeholder:"Password" %>
+  </p>
   </div><br>
 
   <div class="submit-field">
+  <p align="center">
     <%= form.submit %>
+  </p>
   </div>
 
   <div class="other-links">
+  <p align="center">
     <%= link_to t(".forgot_password"), new_password_path %>
+  </p>
   </div>
 
   <h4> Not a member yet? </h4>
@@ -25,21 +33,21 @@
   <div class="panel-footer">
 
   <div class="other-links">
-  <p align="center">
-  <span class="glyphicon glyphicon-pencil"></span>
     <% if Clearance.configuration.allow_sign_up? %>
-    <button type="link_to t(".sign_up"), sign_up_path" class="btn btn-primary">Sign Up with Email</button>
-    <% end %>
+    <a href="/sign_up" class="btn btn-block btn-social btn-lg btn-facebook">
+          <i class="glyphicon glyphicon-pencil" >
+            </i> Sign Up with Email</a>
+   <% end %>
   </div>
 <% end %>
 
 <h4 align="center">
- or
+ or 
 </h4>
 
 <a href="/auth/facebook" title="Facebook" class="btn btn-block btn-social btn-lg btn-facebook">
             <i class="fa fa-facebook"
-"></i> Sign up with Facebook
+"></i> Connect With Facebook
         </a>
 
 </div>
