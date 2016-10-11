@@ -1,10 +1,11 @@
 <div class="container" id="sign-page">
 <div id="sign-boxe">
+<div class="col-md-8 col-md-offset-2"
 <%= form_for @job do |f| %>
-	<p id="job_title">
-		<%= f.label :title %><br>
-		<span class="glyphicon glyphicon-edit"></span>
+	<div class="input-group"> 
+		<span class="input-group-addon"><span class="glyphicon glyphicon-edit"></span></span>
 		<%= f.text_field :title, placeholder:"Title", class: "form-control" %>
+	</div>
 
 	<p id="job_location">
 		<%= f.label :location %><br>

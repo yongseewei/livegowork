@@ -24,7 +24,7 @@ class SessionsController < Clearance::SessionsController
 
     sign_in(@user) do |status|
       if status.success?
-        redirect_back_or  params[:session][:this_url]
+        redirect_to params[:session][:this_url], notice: "Sign in successfully!"
       else
         flash.now.notice = status.failure_message
         render template: "sessions/new", status: :unauthorized
