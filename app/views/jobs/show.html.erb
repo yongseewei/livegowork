@@ -36,7 +36,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-default">
+		<!-- <div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row-fluid">
 					<div class="col-md-8">
@@ -47,5 +47,51 @@
 			</div>
 		</div>
 
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-md-8">
+						<h1>Rewards</h1>
+							<p class="description"><%= simple_format(@job.description) %></p>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
 	</div>
 </div>
+
+
+	<div id="job_show" class="row" >
+		<div class="col-sm-6 col-sm-offset-1">
+			<div class="panel">
+				<div class="panel-body">
+					<h1>Requirement</h1>
+					<p class="description"><%= simple_format(@job.description) %></p>
+				</div>
+			</div>
+			<div class="panel">
+				<div class="panel-body">
+					<h1>Rewards</h1>
+					<p class="description"><%= simple_format(@job.description) %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 col-sm-offset-1">
+			<div class="panel">
+		    <div class="panel-body">
+					<h1>Details</h1>
+					<div id="map-container">
+					  <div id="map" style="width:400px;height:400px;background:yellow"></div>
+					</div>
+					<p>
+
+					<p>
+
+					</p>
+					<h4 class="location">City: <%= @job.location %></h4>
+					<h4 class="salary">Tips: RM <%= @job.salary%> /day</h4>
+		    </div>
+			</div>
+	  </div>
+	</div>
