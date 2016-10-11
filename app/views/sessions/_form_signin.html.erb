@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for :session, url: session_path do |form| %>
+      <br>
+      <div class="input-group">   
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        <%= form.text_field :email, placeholder:"Email", class: "form-control" %>
+      </div><br>
+
+      <div class="input-group">  
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <%= form.password_field :password, placeholder:"Password", class: "form-control" %>
+      </div><br>
+
+      <div >
+        <%= form.hidden_field :this_url, value: request.path_info  %>
+      </div>
+
+      <div class="submit-field">
+      <p align="center">
+        <%= form.submit 'Sign In', class: "btn btn-outline-primary" %>
+      </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <a href="/auth/facebook" title="Facebook" class="btn btn-block btn-social btn-md btn-facebook">
+      <i class="fa fa-facebook""></i> Sign In With Facebook
+    </a>
+  </div>
+</div>
+
