@@ -1,3 +1,5 @@
+<%= image_tag(@user.avatar_url) if @user.avatar? %>
+
 <div class="text-field">
   <%= form.label :first_name %>
   <%= form.text_field :first_name%>
@@ -23,4 +25,11 @@
 <div class="password-field">
   <%= form.label :password %>
   <%= form.password_field :password %>
+</div>
+
+<<div class="file_field">
+
+  <%= f.file_field :avatar %>
+  <%= f.hidden_field :avatar_cache %>
+
 </div>

@@ -5,8 +5,12 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
 
+  mount_uploader :avatar, AvatarUploader
+
+  
+
   def self.create_with_auth_and_hash(authentication,auth_hash)
-    
+
     create! do |u|
 
       u.first_name = auth_hash["info"]["first_name"]
@@ -16,6 +20,7 @@ class User < ActiveRecord::Base
       u.email = auth_hash["extra"]["raw_info"]["email"]
       u.password = SecureRandom.hex(6)
       u.authentications<<(authentication)
+      u.avatar = params[:file]
     end
   end
 
