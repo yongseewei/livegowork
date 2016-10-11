@@ -313,3 +313,30 @@ ul.photo-gallery-list {
       background: rgba(black,0.1);
 
 }
+
+#user-score {
+    position: absolute;
+    left: 0;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#big-star {
+    height: 180px;
+    width: 210px;
+}
+
+#user-review-count {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#user-container {
+    height: calc(100% - 50px);
+    overflow: auto;
+}
