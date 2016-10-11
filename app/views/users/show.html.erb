@@ -26,14 +26,8 @@
 
                 <% if current_user == @user %>
 
+                <%= button_to "Edit Profile", edit_user_path, class: "btn btn-primary btn-block", method: :get %>
                 
-                      <button type="button" <% edit_user_path %> class="btn btn-primary btn-block">
-                      <span class="fa fa-gear"></span> 
-                      <%= link_to "Edit profile", edit_user_path %> 
-                      </button>
-
-
-
 
                   <% else %>
                   <%= render "/components/follow_button_big", :user => @user %>
