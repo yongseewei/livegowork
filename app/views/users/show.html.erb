@@ -1,41 +1,135 @@
-<h1> Hi there <%= current_user.full_name %></h1>
+<p> logged in as <%= current_user.full_name %></p>
+<div class="container">
+<div class="container" id="user-container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+            <%= image_tag current_user.avatar.url(:medium), class: "center-block img-circle img-thumbnail img-responsive" %>
+              
+              <ul class="list-inline ratings text-center" title="Ratings">
+                
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+              </ul>
+              <% follower_count = @user.followers.count %>
+              <h2> <% if follower_count != 1 %>
+                  <%= follower_count %> followers 
+                    <% else %> 1 follower
+                  <% end %> 
+              </h2>
 
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
 
-<p> <%= @user.full_name %> </p>
+                <% if current_user == @user %>
 
-<p> <%= @user.review_score.to_f %> </p>
+                <%= button_to "Edit Profile", edit_user_path, class: "btn btn-primary btn-block", method: :get %>
+                
+
+                  <% else %>
+                  <%= render "/components/follow_button_big", :user => @user %>
+                 <% end %> 
+
+
+            </div>
+            <!--/col--> 
+            <div class="col-md-4">
+              <h2><%= @user.full_name %></h2>
+              <p><strong>About: </strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
+
+              <p><strong>Skills: </strong>
+                <% @user.skills.each do |skill| %>
+                  <span class="label label-info tags" style="margin-left: 5px"> <%= skill.skill %> </span> 
+                <% end %>
+                
+              </p>
+            </div>
+
+            <div class="col-md-4">
+              <img src="/big-star.png" alt="" class="center-block" id="big-star" >
+              <div class="center" id="user-score"> <%= @user.review_score %> </div>     
+            </div>
+            
+            <div class="col-xs-12 col-sm-4">
+
+            </div>
+            
+            <div class="col-xs-12 col-sm-4">
+              <% review_count = @user.review.count %>
+              <p id="user-review-count"> Based on <%= review_count %> 
+                <% if review_count == 1 %> review.
+                <% else %>
+                reviews.
+              <% end %> </p>
 
 <% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
-	<p> How was this employee? </p>
+  <p>Your score:</p>
     <%= render partial: 'review_form' %>
 <% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
-  <p> How was this employer? </p>
+  <p>Your score:</p>
     <%= render partial: 'review_form' %>
   <% else %>
 <% end %>
- 
 
-<% @user.review.order('created_at DESC').each do |review| %>
-  <div class="container">
-    Rating: 
-    <div id="stars_<%= review.id %>"></div>
-    Comments: <%= review.comments %>
+
+            </div>
+            <!--/col-->
+          </div>
+          <!--/row-->
+        </div>
+        <!--/panel-body-->
+      </div>
+      <!--/panel-->
+    </div>
+    <!--/col--> 
   </div>
-  -------------------------------------
-  <script>
-    $('#stars_<%= review.id %>').raty({
-      path: '/assets',
-      readOnly: true,
-      score: <%= review.score %>
-    });
-  </script>
+  <!--/row--> 
+</div>
+<!--/container-->
+
+<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
+  <h1> Please leave a review for this employee above. </h1>
+<% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
+<h1> Please leave a review for this employer above. </h1>
+     <% else %>
 <% end %>
 
-<div class="panel panel-default"><div>
-<div class="panel"></div>
 
-<h6> <%= current_user.followers.count %></h6>
-<%= render "/components/follow_button", :user => @user %>
+<% @user.reviews.each_slice(3) do |row| %>
+<div class="row">
+  <% row.each do |review| %>
+  <div class="col-md-4 portfolio-item">
+    <div class="container" id="user-container">
 
+      <div class="col-md-4 portfolio-item">
+        <div class="well panel panel-default">
+          <div id="stars_<%= review.id %>"> </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 text-center">
+              <%= image_tag review.reviewer.avatar.url(:small_thumb), class: "center-block img-circle img-thumbnail img-responsive" %>
+                  </div>
+                    <p><strong>reviewed by: </strong> <%= review.reviewer.full_name %> </p>
+                    <p><strong>comments: </strong> <%= review.comments %> </p>
+                      <script>
+                        $('#stars_<%= review.id %>').raty({
+                          path: '/assets',
+                          readOnly: true,
+                          score: <%= review.score %>
+                        });
+                      </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+</div>
