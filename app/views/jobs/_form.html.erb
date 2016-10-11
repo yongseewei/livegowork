@@ -2,19 +2,19 @@
 <div id="sign-boxe">
 <%= form_for @job do |f| %>
 	<p id="job_title">
-		<%= f.label :title %><br>
+		<%= f.label :title %>
 		<span class="glyphicon glyphicon-edit"></span>
 		<%= f.text_field :title, placeholder:"Title", class: "form-control" %>
 
 	<p id="job_location">
-		<%= f.label :location %><br>
+		<%= f.label :location %>
 		<span class="glyphicon glyphicon-map-marker"></span>
-		<%= f.text_field :location, placeholder:"Location"  %>
+		<%= f.text_field :location, placeholder:"Location", class: "form-control"  %>
 
 	<p id="job_salary">
-		<%= f.label :salary %><br>
+		<%= f.label :salary %>
 		<span class="glyphicon glyphicon-piggy-bank"></span>
-		<%= f.number_field :salary, placeholder:"Job Salary" %>
+		<%= f.number_field :salary, placeholder:"Job Salary", class: "form-control" %>
 
 	<div class="form-group">
 	<span class="glyphicon glyphicon-picture"></span>
@@ -36,9 +36,9 @@
 	</div><br>
 
 	<p id="job_description">
-		<%= f.label :description %><br>
+		<%= f.label :description %>
 		<span class="glyphicon glyphicon-comment"></span>
-		<%= f.text_field :description, placeholder:"Job Desciption"  %>
+		<%= f.text_field :description, placeholder:"Job Desciption", class: "form-control"  %>
 
 	<div class="row text-center">
 		<%= f.button :submit, class: "btn btn-primary" %>

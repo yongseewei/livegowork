@@ -1,6 +1,7 @@
 class Job < ActiveRecord::Base
 	belongs_to :user
 	has_many :job_applications
+	has_many :users, through: :job_applications
 
   scope :salary_range, ->(min, max, id) { where(salary: min..max, id: id)}
   scope :filter_map, ->(loc) { where(salary: loc[:min]..loc[:max]).near([loc[:lat],loc[:lng]],loc[:zoom])}
