@@ -3,11 +3,9 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :destroy, :update]
 
   def index
-    # byebug
   	@search = params[:query].presence || "Kuala Lumpur"
     @jobs = Job.near(@search,8)
     filtering_params(params).each do |key, value|
-      # byebug
       @jobs = @jobs.public_send(key, value) if value.present?
     end
     @jobs.length == 0 ? set_position : set_marker
@@ -18,8 +16,11 @@ class JobsController < ApplicationController
   end
 
   def filter
+    @jobs = Job.where(id: filtering_id(params).split(" ")) if filtering_id(params).present?
     filtering_params(params).each do |key, value|
-      @jobs = Job.public_send(key, value) if value.present?
+      if value.present?
+        @jobs = @jobs.nil? ? Job.public_send(key, value) : @jobs.public_send(key, value)
+      end
     end
     set_marker
   end
@@ -70,7 +71,11 @@ class JobsController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:filter_map, :filter_price,:filter_price2)
+    params.slice(:filter_map, :filter_price, :filter_price2, :filter_job)
+  end
+
+  def filtering_id(params)
+    params.slice(:filter_id).values[0]
   end
 end
 
