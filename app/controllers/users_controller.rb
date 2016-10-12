@@ -31,7 +31,6 @@ class UsersController < Clearance::UsersController
   end
 
   def update
-    byebug
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
