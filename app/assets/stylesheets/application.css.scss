@@ -24,9 +24,12 @@
 
 
 
-.carousel-inner > .item > img {
-    margin: 0 auto;
-}
+.carousel-inner > .item > img,
+ .carousel-inner > .item > a > img {
+     width: 100%;
+     height:40em;
+     margin: auto;
+ }
 
 .home.index body{
 	overflow-x: hidden;

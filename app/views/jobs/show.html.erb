@@ -1,4 +1,4 @@
-<br><br>
+
 <div id="job_show" class="row" >
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-default">
@@ -12,10 +12,10 @@
 					<div class="col-md-8">
 						<h1><%=	@job.title %></h1>
 							<p class="description"><%= simple_format(@job.description) %></p>
-						</div>
-						<% if signed_in? && !current_user.jobs.find_by(id: params[:id])  %>
-							<%= render 'jobs/jobapplication' %>
-						<% end %>
+					</div>
+					<% if signed_in? && !current_user.jobs.find_by(id: params[:id])  %>
+						<%= render 'jobs/jobapplication' %>
+					<% end %>
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-md-6">
@@ -28,13 +28,65 @@
 											<%= link_to "Edit", edit_job_path(@job), class: "btn btn-default" %>
 											<%= link_to "Delete", job_path(@job), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
 										<% end %>
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- <div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-md-8">
+						<h1>Requirement</h1>
+							<p class="description"><%= simple_format(@job.description) %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-md-8">
+						<h1>Rewards</h1>
+							<p class="description"><%= simple_format(@job.description) %></p>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
 	</div>
 </div>
 
+
+	<div id="job_show" class="row" >
+		<div class="col-sm-6 col-sm-offset-1">
+			<div class="panel">
+				<div class="panel-body">
+					<h1>Requirement</h1>
+					<p class="description"><%= simple_format(@job.description) %></p>
+				</div>
+			</div>
+			<div class="panel">
+				<div class="panel-body">
+					<h1>Rewards</h1>
+					<p class="description"><%= simple_format(@job.description) %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 col-sm-offset-1">
+			<div class="panel">
+		    <div class="panel-body">
+					<h1>Details</h1>
+					<div id="map-container">
+					  <div id="map" style="width:400px;height:400px;background:yellow"></div>
+					</div>
+					<h4 class="location">City: <%= @job.location %></h4>
+					<h4 class="salary">Tips: RM <%= @job.salary%> /day</h4>
+		    </div>
+			</div>
+	  </div>
+	</div>
