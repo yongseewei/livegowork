@@ -14,6 +14,7 @@ $(document).ready(function(){
 	})
 
 	$(document).on('submit',".sign-in-form",function(event){
+		event.preventDefault();
 		$.ajax({
 			type: 'POST',
 			url: $(this).attr('action'),
