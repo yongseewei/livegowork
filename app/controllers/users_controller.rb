@@ -31,7 +31,7 @@ class UsersController < Clearance::UsersController
   end
 
   def update
-    if @user.update!(user_params)
+    if @user.update(user_params)
       redirect_to user_path(@user)
     else
       render template: "users/edit"
