@@ -22,7 +22,9 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
 
-  has_attached_file :avatar, styles: { medium: "140x140#", thumb: "100x100#" ,small_thumb: "50x50#"}, default_url: "/images/:style/missing.png"
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" ,small_thumb: "60x60#"}, default_url: "missing.png"
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
 
@@ -94,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def taken_job?(user)
-    
+
     JobApplication.where(user_id: user.id, confirmed: true).any?
   end
 

@@ -16,20 +16,20 @@ var navigation = responsiveNav("#nav");
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
 
-              <li><%= link_to "Home",root_path%></li>
 
               <% if signed_in? %>
                 <li><%= link_to "New Job", new_job_path %></li>
 
                 <li><%= link_to "Sign out", sign_out_path, id: "sign_out", method: :delete %></li>
+
                 <li >
                 <%= link_to user_path(current_user) do%>
-                <img src="<%= current_user.avatar.url(:small_thumb) %>" class="img-circle my-imgcircle">
-                <%end%>
+                <img src="<%= current_user.avatar.url(:small_thumb) %>" class="img-circle my-imgcircle"
+                style="height:1.5em;">
+                <% end %>
                 </li>
-              <% else %>
+               <% else %>
                 <li><a data-toggle="modal" href="#myModal" data-target="#myModal">Sign In/Sign Up</a></li>
-
               <% end %>
           </ul>
         </div>

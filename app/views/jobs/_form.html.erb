@@ -1,7 +1,7 @@
 <div class="container" id="sign-page">
 
 	<div id="sign-boxe">
-		<%= form_for @job, url: jobs_path, method: :post do |f| %>
+		<%= form_for @job do |f| %>
 			<div class="input-group"> 
 				<span class="input-group-addon"><span class="fa fa-pencil-square-o"></span></span>
 				<%= f.text_field :title, placeholder:"Title", class: "form-control" %>
@@ -14,7 +14,7 @@
 
 			<div class="input-group">
 				<span class="input-group-addon"> <span class="fa fa-money"></span> </span>
-				<%= f.number_field :salary, placeholder:"Job Salary", class: "form-control" %>
+				<%= f.number_field :salary, placeholder:"Job Salary (MYR/day)", class: "form-control" %>
 			</div><br>
 
 			<div class="input-group">

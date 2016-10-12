@@ -342,11 +342,17 @@ ul.photo-gallery-list {
 }
 
 .thumbnail {
-    width: 100%px;
+    height: 360px;
+    padding:0;
 }
 
 
 .style_image {
-    width: 300px;
+    width: 100%;
+    height: 138px !important;
+}
 
+
+#job_profile{
+    float:right;
 }
