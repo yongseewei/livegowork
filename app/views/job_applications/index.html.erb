@@ -1,10 +1,57 @@
-<p> Here are the applicants for your job:  </p>
-<% @job_application.each do |a| %>
-	<%= link_to a.user.full_name, user_path(a.user.id) %>
-	<p><%= link_to 'Confirm this applicant', job_job_application_path(id: a.id), method: :patch %></p>
-	<br>	
+<% if @job_application.any? %>
+<% job_id = @job_application.first.job_id %>
+<h1 class="text-center"> Here are the applicants for your <%= Job.find(job_id).title%> job: </h1>
+<% else %>
+<h1 class="text-center"> Sorry, you have no applicants yet. </h1>
 <% end %>
 
+<% @job_application.each_slice(2) do |row| %>
+<div class="row">
+  <% row.each do |a| %>
+    
+			<div class="container">
+		
+				<div class="col-sm-6 portfolio-item">
+				
+					<div class="well panel panel-default" id="job-applicant-panel">
+					  <div class="row">
+					    <div class="col-sm-4">
+					     <%= image_tag a.user.avatar.url(:medium), class: "center-block img-circle img-thumbnail img-responsive" %>
+					    </div>
+					    <div class="col-sm-4">
+					      <h3> <%= link_to a.user.full_name, user_path(a.user.id) %> </h3>
+					      
+					      <% #unless a.check_clash? %>
+					      <% if !a.confirmed? %>
+					      <p><%= link_to 'Confirm applicant', job_job_application_path(id: a.id), method: :patch, class: "btn btn-primary btn-md" %></p>
+					      <% else %>
+					      	<p class="alert alert-success" id="applicant-confirmed-alert"> Confirmed! </p>
+					      <% end %>
+					      <% #end %>
 
 
 
+					      <p id="jop-application-range"><small> Applied <%= a.start_date.to_formatted_s(:short) %> to <%= a.end_date.to_formatted_s(:short) %> </small></p> 
+					    </div>
+					    <div class="col-sm-4">
+					      <h3></h3> 
+						      <img src="/big-star.png" alt="" class="center-block" id="job-application-star" >
+						      	<% if a.user.review.count > 0 %>
+	               		<div class="center" id="job-applicant-score"> <%=a.user.review_score%></div>
+	              			<% else %>
+	                		<div class="center" id="job-applicant-score"> 5.0 </div>
+	                	<% end %>
+
+
+					    </div>
+					  </div>
+
+					</div>
+
+				</div>
+			
+			<% end %>
+		</div>
+	
+	<% end %>
+</div>
