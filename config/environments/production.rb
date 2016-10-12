@@ -80,8 +80,8 @@ Rails.application.configure do
   storage: :s3,
   s3_credentials: {
     bucket: "livegowork",
-    access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+    access_key_id: ENV['AMAZON_ACCESS_KEY'],
+    secret_access_key: ENV['AMAZON_SECRET_KEY'],
     s3_region: 'ap-southeast-1',
   }
 }
