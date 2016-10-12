@@ -8,9 +8,10 @@ $(document).on("turbolinks:load",function(){
 	  handler.bounds.extendWith(markers);
 	  handler.fitMapToBounds();
 	  handler.getMap().setZoom(zoom);
-	  handler.map.centerOn(center_build)
+	  handler.map.centerOn(center_build);
+	  
 	  google.maps.event.addListener(handler.getMap(), 'zoom_changed', function(e) {
-	  	map_ajax();
+		  map_ajax();
 	  })
 	  google.maps.event.addListener(handler.getMap(), 'dragend', function() {
 	  	map_ajax();
@@ -18,23 +19,63 @@ $(document).on("turbolinks:load",function(){
 	});
 
 	$(document).on("mouseover","#list_job .box",function(event){
-		// debugger
 		var index = $(this).index();
 		markers[index].setMap(null);
     handler.removeMarker(markers[index]);
     gr = {
-	      "lat": markerabc[index].lat,
-	      "lng": markerabc[index].lng,
-	      "picture": {
-	        "url": "marker-blue.png","width":  50,"height": 50     
-	      }
-	    }
+      "lat": markerabc[index].lat,
+      "lng": markerabc[index].lng,
+      "picture": {
+        "url": "marker-blue.png","width":  50,"height": 50     
+      }
+    }
     gr.marker = handler.addMarker(gr);
 	}).on("mouseout","#list_job .box",function(event){
 		var index = $(this).index()
 		handler.removeMarker(gr.marker);
    	markers[index] = handler.addMarker(markerabc[index]);
 	})
+
+	$(document).on("submit","#search-submit2",function(event){
+		event.preventDefault();
+		var data = {filter_price2: {min: $("#slider-range").slider("values", 0),max: max_price() }}
+		if ($("#filter-job").val() != ""){
+			var data2 = {filter_job: {name: $("#filter-job").val()}}
+			data = $.param(data) + '&' + $.param(data2)
+		} else{
+			data = $.param(data)
+		}
+		$.ajax({
+			type: 'GET',
+			url: $(this).attr('action'),
+			data: $(this).serialize() + '&' + data,
+			dataType: "script",
+			success: function(msg) {
+				for (var i = 0; i < markers.length; i++) {
+		      markers[i].setMap(null);
+		      handler.removeMarkers(markers);
+		    }
+				markers = [];
+        handler = new Gmaps.build('Google');
+
+				handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+
+				  markers = handler.addMarkers(markerabc);
+				  handler.bounds.extendWith(markers);
+				  handler.fitMapToBounds();
+				  handler.getMap().setZoom(zoom);
+				  handler.map.centerOn(center_build);
+				  
+				  google.maps.event.addListener(handler.getMap(), 'zoom_changed', function(e) {
+					  map_ajax();
+				  })
+				  google.maps.event.addListener(handler.getMap(), 'dragend', function() {
+				  	map_ajax();
+				  })
+				});
+      }
+		});
+	});
 
 
 	function map_ajax(){

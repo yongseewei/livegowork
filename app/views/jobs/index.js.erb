@@ -1,1 +1,6 @@
+// var center = <%= j @center %>;
+var markerabc = (<%=raw @hash.to_json %>);
+var zoom = (<%=raw 12.to_json%>)
+var center_build = (<%=raw Geocoder.coordinates(@search).to_json%>)
+var testing123 = 1233;
 $('#list_job').html("<%= j (render 'list', :object => @jobs) %>");

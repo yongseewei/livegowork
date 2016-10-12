@@ -20,12 +20,17 @@ $(document).ready(function(){
 			data: $(this).serialize(),
 			dataType: "script",
 			success: function(msg) {
-				$("#show_error").slideDown(1000);
-				setTimeout(function() { 
-					$("#show_error").slideUp(1000,function(){
-						$("#show_error").empty();
-					}); 
-				}, 3000);
+				if($("#show_error .flash").length){
+					$("#show_error").slideDown(1000);
+					setTimeout(function() { 
+						$("#show_error").slideUp(1000,function(){
+							$("#show_error").empty();
+						}); 
+					}, 3000);
+				}
+				else{
+					location.reload();
+				}
 			}
 		})
 	})

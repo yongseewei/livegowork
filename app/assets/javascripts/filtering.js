@@ -33,26 +33,7 @@ $(function() {
 		});
 	});
 
-	$(document).on("submit","#search-submit2",function(event){
-		event.preventDefault();
-		var data = {filter_price2: {min: $("#slider-range").slider("values", 0),max: max_price() }}
-		if ($("#filter-job").val() != ""){
-			var data2 = {filter_job: {name: $("#filter-job").val()}}
-			data = $.param(data) + '&' + $.param(data2)
-		} else{
-			data = $.param(data)
-		}
-		$.ajax({
-			type: 'GET',
-			url: $(this).attr('action'),
-			data: $(this).serialize() + '&' + data,
-			dataType: "script",
-			success: function(msg) {
-        redraw_marker();
-         handler.getMap().setZoom(13);
-      }
-		});
-	});
+	
 
 	$(document).on("submit","#job-filter",function(event){
 		event.preventDefault();

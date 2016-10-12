@@ -15,7 +15,6 @@ module JobsHelper
 
 	def set_position
     coord = Geocoder.coordinates(@search)
-
 		@hash = Gmaps4rails.build_markers(@search) do |search, marker|
       marker.lat coord[0]
       marker.lng coord[1]

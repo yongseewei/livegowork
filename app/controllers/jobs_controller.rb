@@ -9,8 +9,9 @@ class JobsController < ApplicationController
       @jobs = @jobs.public_send(key, value) if value.present?
     end
     @jobs.length == 0 ? set_position : set_marker
+    # byebug
     respond_to do |format|
-      format.js
+      format.js 
       format.html
     end
   end
