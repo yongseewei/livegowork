@@ -56,6 +56,7 @@ gem 'ratyrate'
 # Use ratyrate for star ratings
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'  
 gem 'fog'
+gem 'aws-sdk', '~> 2.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
