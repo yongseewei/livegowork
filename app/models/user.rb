@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  #notifications
+  has_many :notifications, foreign_key: :recipient_id
+
   has_many :job_applications, :dependent => :destroy
 
   has_many :reviews, :dependent => :destroy

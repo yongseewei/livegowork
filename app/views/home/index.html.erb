@@ -2,7 +2,7 @@
 <div class="row" >
 	<div class="col-md-12 column1">
 		<div class="hero-unit">
-		<h1 class="headerline">Explore this City</h1>
+		<h1 class="headerline">Explore the World</h1>
 
 
 		<%= form_tag "/jobs",  method: :get, class: "navbar-form navbar-left", id: "search-submit" do %>
@@ -13,10 +13,6 @@
 				<%= submit_tag "Search", {class: "btn btn-default"} %>
 			</div>
 		<% end %>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
    </div>
 		<!-- <div align="center" class="embed-responsive embed-responsive-16by9">
 		   <video autoplay loop class="embed-responsive-item">
@@ -28,6 +24,13 @@
 
 
 <div class="container my-custom-container">
+
+<div class="jumbotron">
+  <h1>About Live Work Go</h1>
+  <p> Live Work Go also known as LWG is a lifestyle app, with a vision of providing easy access to backpackers and students to find jobs across the world.
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Contact Us</a></p>
+</div>
+
 	<div class="row" >
 		<div class="col-md-12 column1">
 			<h1 class="text-center text-muted">
@@ -36,7 +39,6 @@
 			<h3 class="text-center text-muted">Discover & connect with great local businesses in Malaysia</h3>
 		</div>
 	</div>
-
 
 
 	<div id="categories">
@@ -115,6 +117,32 @@
 			<h3 class="text-center text-muted">Explore some of the best tips from around the city from our partners and friends.</h3>
 		</div>
 	</div>
+
+ 
+<div class="container">
+      <div class="row">
+      <%@jobs[0..2].each do |job|%>
+        <div class="col-xs-18 col-sm-6 col-md-3">
+          <div class="thumbnail">
+
+            <%= image_tag job.images[0].square.url, :class=> "style_image"%>
+           
+              <div class="caption" style="height:150px;">
+              	 <%= image_tag job.user.avatar.url(:small_thumb), class: "img-circle my-imgcircle", id:"job_profile"%>
+                <h4><%=job.title%></h4>
+                <p><%=job.description%></p>
+                <p>RM <%=job.salary%> per month</p>
+                <%=link_to "Apply", job_path(job.id), class: "btn btn-info btn-xs"%>
+              </div>
+          </div>
+        </div>
+        <%end%>
+
+
+
+       </div>
+</div>
+
 
 
 	
@@ -200,4 +228,3 @@
 </div>
 =======
 </div> -->
->>>>>>> master
