@@ -17,7 +17,6 @@ class JobApplicationsController < ApplicationController
 		@job_application = current_user.job_applications.new(job_application_params)
 		@job = @job_application.job
 		if @job_application.save
-
 			#create a notification
 			@job.users.uniq - [current_user]).each do |user|
 				Notification.create(recipient:user, actor: current_user, action: "posted", notifiable: @job_application)
