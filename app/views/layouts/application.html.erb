@@ -37,5 +37,36 @@
 
   <%= yield %>
 
+   <div id="chatbox_id<%= current_user.id if signed_in? %>">
+      <div class="chatbox">
+        <div class="chatboxhead chatboxclose">
+          <div class="chatboxtitle">
+            <i class="fa fa-comments"></i>
+            
+            <h1>Ask Me Anything</h1>
+          </div>
+          <div class="chatboxoptions">
+            <%= link_to "<i class='fa  fa-minus'></i> ".html_safe, "#", class: "toggleChatBox", style: "display:none"  %>
+            <%= link_to "<i class='fa  fa-plus'></i> ".html_safe, "#", class: "toggleChatBox" %>
+             &nbsp;&nbsp;
+          </div>
+          <br clear="all"/>
+        </div>
+        <div class="chatboxcontent">
+          <% if @messages && @messages.any? %>
+            <%= render @messages %>
+          <% end %>
+        </div>
+        <div class="chatboxinput">
+          <%= form_for @message, :remote => true  do |f| %>
+              <%= f.text_area :body, class: "chatboxtextarea" %>
+              <%= f.hidden_field :status , value: "user" %>
+          <% end %>
+        </div>
+        <%= subscribe_to "/messages/new" %> 
+        <%= subscribe_to "/bots/new" %>
+      </div> 
+    </div>
+
 </body>
 </html>

@@ -55,6 +55,9 @@ gem 'ratyrate'
 
 # Use ratyrate for star ratings
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'  
+gem 'private_pub'
+gem 'thin'
+gem 'api-ai-ruby', '~> 1.2', '>= 1.2.1'
 gem 'fog'
 gem 'aws-sdk', '~> 2.3'
 

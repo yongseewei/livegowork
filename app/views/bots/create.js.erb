@@ -1,0 +1,14 @@
+<% publish_to "/bots/new" do %>
+	var id = "<%= current_user.id %>";
+	var chatbox = $("#chatbox_id"+ id + " .chatbox .chatboxcontent");
+	var message_id = "<%= @message.user.id %>";
+	var audioElement = document.createElement('audio');
+  audioElement.setAttribute('src', 'https://a.clyp.it/f5gkxsoh.mp3');
+
+  if ( id == message_id){
+    audioElement.play();
+  }
+	chatbox.append("<%= j render( partial: @message ) %>");
+	chatbox.scrollTop(chatbox[0].scrollHeight);
+
+<% end %>

@@ -14,6 +14,8 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-ui
+//= require private_pub
+//= require chat
 //= require jquery.raty
 //= require ratyrate
 //= require jquery.raty.min
