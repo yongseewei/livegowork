@@ -122,7 +122,7 @@
             <%= image_tag job.images[0].square.url, :class=> "style_image"%>
             <% end %>
               <div class="caption" style="height:150px;">
-              	 <%= image_tag job.user.avatar.url(:small_thumb), class: "img-circle my-imgcircle", id:"job_profile"%>
+              	 <%= image_tag job.user.avatar.url(:thumb), class: "img-circle my-imgcircle", id:"job_profile"%>
                 <h4><%=job.title%></h4>
                 <p><%=job.description%></p>
                 <p>RM <%=job.salary%> per month</p>
