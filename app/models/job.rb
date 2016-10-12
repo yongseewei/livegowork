@@ -1,5 +1,7 @@
 class Job < ActiveRecord::Base
 	belongs_to :user
+	has_many :job_applications
+	has_many :users, through: :job_applications
 	has_many :job_applications, dependent: :destroy
 
 	validates :title, presence: true
