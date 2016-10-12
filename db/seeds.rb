@@ -21,7 +21,7 @@ User.all.each { |u| uids << u.id }
     user['last_name'] = Faker::Name.last_name
     user['email'] = Faker::Internet.email
     user['encrypted_password'] = Faker::Internet.password(8)
-    user['avatar']=Faker::Avatar.image
+    user['avatar']=Faker::Avatar.image("my-own-slug", "50x50")
     user['about']=Faker::Lorem.paragraph
 
 
