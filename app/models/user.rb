@@ -23,7 +23,14 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
 
 
-  has_attached_file :avatar, styles: { medium: "140x140#", thumb: "100x100#" ,small_thumb: "60x60#"}, default_url: "missing.png"
+  has_attached_file :avatar, styles: { medium: "140x140#", thumb: "100x100#" ,small_thumb: "60x60#"}, default_url: "missing.png",:storage => :s3,:s3_credentials => {
+                            :bucket => "livegowork",
+                            :s3_region => ENV['AWS_REGION'],
+                            :access_key_id => ENV['AMAZON_ACCESS_KEY'],
+                            :secret_access_key => ENV['AMAZON_SECRET_KEY']
+                              },
+                              :path => ":class/:id/:basename_:style.:extension",
+                              :url => ":s3_sg_url" 
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
