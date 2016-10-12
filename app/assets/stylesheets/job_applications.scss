@@ -1,3 +1,33 @@
 // Place all the styles related to the job_applications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#job-application-star {
+  position: relative;
+  top: -23px;
+  height: 170%;
+  width: 165%;
+}
+
+#job-applicant-panel {
+	max-height: 187px;	
+}
+
+#job-applicant-score {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#applicant-confirmed-alert {
+     
+}
+
+#jop-application-range {
+    position: absolute;
+    top: 90%;    
+}

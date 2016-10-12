@@ -1,4 +1,5 @@
-<p> logged in as <%= current_user.full_name %></p>
+<br>
+<br>
 <div class="container">
 <div class="container" id="user-container">
   <div class="row">
@@ -39,11 +40,12 @@
             <!--/col--> 
             <div class="col-md-4">
               <h2><%= @user.full_name %></h2>
-              <p><strong>About: </strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
+              <p><strong>About: </strong> <%=@user.about%> </p>
 
               <p><strong>Skills: </strong>
                 <% @user.skills.each do |skill| %>
                   <span class="label label-info tags" style="margin-left: 5px"> <%= skill.skill %> </span> 
+                  
                 <% end %>
                 
               </p>
@@ -51,7 +53,13 @@
 
             <div class="col-md-4">
               <img src="/big-star.png" alt="" class="center-block" id="big-star" >
-              <div class="center" id="user-score"> <%= @user.review_score %> </div>     
+              <% if @user.review.count > 0 %>
+                <div class="center" id="user-score"> <%= @user.review_score %> </div>
+              <% else %>
+                <div class="center" id="user-score"> 5.0 </div>
+              <% end %>
+            
+
             </div>
             
             <div class="col-xs-12 col-sm-4">
@@ -65,17 +73,14 @@
                 <% else %>
                 reviews.
               <% end %> </p>
-
-<% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
-  <p>Your score:</p>
-    <%= render partial: 'review_form' %>
-<% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
-  <p>Your score:</p>
-    <%= render partial: 'review_form' %>
-  <% else %>
-<% end %>
-
-
+                <% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
+                  <p>Your score:</p>
+                    <%= render partial: 'review_form' %>
+                <% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
+                  <p>Your score:</p>
+                    <%= render partial: 'review_form' %>
+                  <% else %>
+                <% end %>
             </div>
             <!--/col-->
           </div>
@@ -92,9 +97,9 @@
 <!--/container-->
 
 <% if !@user.check_if_reviewed?(current_user) && @user.posted_job?(current_user) && @user.taken_job?(@user) && @user != current_user %>
-  <h1> Please leave a review for this employee above. </h1>
+  <h1 class="text-center"> Please leave a review for this employee above. </h1>
 <% elsif !@user.check_if_reviewed?(current_user) && @user.posted_job?(@user) && JobApplication.where(user_id: current_user.id, confirmed: true).any? && @user != current_user %>
-<h1> Please leave a review for this employer above. </h1>
+<h1 class="text-center"> Please leave a review for this employer above. </h1>
      <% else %>
 <% end %>
 

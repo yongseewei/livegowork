@@ -30,7 +30,7 @@ module JobsHelper
   def taken_date
     date_s, date_e = [], []
     @job.job_applications.each do |val|
-      date_s += [*val.start_date..val.end_date] 
+      date_s += [*val.start_date..val.end_date] if val.confirmed == true
     end
     date_e = [@job.start_date,@job.end_date]
     [date_s,date_e]
