@@ -55,6 +55,7 @@ gem 'ratyrate'
 
 # Use ratyrate for star ratings
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'  
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -79,3 +80,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+	gem 'rails_12factor'
+
+	gem 'puma', '~> 3.6'
+end

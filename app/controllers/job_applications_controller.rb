@@ -25,9 +25,9 @@ class JobApplicationsController < ApplicationController
 		@job = @job_application.job
 		if @job_application.save
 			#create a notification
-			@job.users.uniq - [current_user]).each do |user|
-				Notification.create(recipient:user, actor: current_user, action: "posted", notifiable: @job_application)
-			end
+			# @job.users.uniq - [current_user]).each do |user|
+			# 	Notification.create(recipient:user, actor: current_user, action: "posted", notifiable: @job_application)
+			# end
 			# job_id = @job_application.job_id
 			# @job = Job.find(job_id)
 			flash[:success] = "Thanks for your interest in this job! You will hear if you were successful soon."
