@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/explore' => 'pages#explore'
   post '/rate' => 'rater#create', :as => 'rate'
 
+  resources :jobs
   resources :jobs do
     resources :job_applications  #, only: [:index, :new, :create, :show]
   end

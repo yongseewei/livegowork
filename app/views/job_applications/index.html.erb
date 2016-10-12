@@ -2,7 +2,7 @@
 <% job_id = @job_application.first.job_id %>
 <h1 class="text-center"> Here are the applicants for your <%= Job.find(job_id).title%> job: </h1>
 <% else %>
-<h1 class="text-center"> Sorry, you have no applicants yet. </h1>
+<h1 class="text-center"> Sorry, you currently have no suitable applicants. </h1>
 <% end %>
 
 <% @job_application.each_slice(2) do |row| %>

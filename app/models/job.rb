@@ -2,6 +2,9 @@ class Job < ActiveRecord::Base
 	belongs_to :user
 	has_many :job_applications, dependent: :destroy
 
+	validates :title, presence: true
+	validates :location, presence: true
+
   scope :salary_range, ->(min, max) { where(salary: min..max)}
   scope :filter_map, ->(loc) { where(salary: loc[:min]..loc[:max]).near([loc[:lat],loc[:lng]],loc[:zoom])}
   scope :filter_price2, ->(loc) {where(salary: loc[:min]..loc[:max])}
