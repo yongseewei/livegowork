@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011093433) do
+
+ActiveRecord::Schema.define(version: 20161012103225) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +62,17 @@ ActiveRecord::Schema.define(version: 20161011093433) do
   end
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recepient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiabale_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
@@ -110,6 +123,7 @@ ActiveRecord::Schema.define(version: 20161011093433) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.text     "about"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

@@ -15,7 +15,6 @@ module JobsHelper
 
 	def set_position
     coord = Geocoder.coordinates(@search)
-
 		@hash = Gmaps4rails.build_markers(@search) do |search, marker|
       marker.lat coord[0]
       marker.lng coord[1]
@@ -30,7 +29,7 @@ module JobsHelper
   def taken_date
     date_s, date_e = [], []
     @job.job_applications.each do |val|
-      date_s += [*val.start_date..val.end_date]
+      date_s += [*val.start_date..val.end_date] if val.confirmed == true
     end
     date_e = [@job.start_date,@job.end_date]
     [date_s,date_e]

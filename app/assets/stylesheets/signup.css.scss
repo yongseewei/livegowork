@@ -2,7 +2,7 @@
   padding: 0;
   margin-top: -20px;
   background-position: 50% 50% !important;
-  background: url("livegowork.jpeg")no-repeat center center fixed;
+  background: url("https://s3-ap-southeast-1.amazonaws.com/livegowork/livegowork.jpeg")no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,7 +12,7 @@
   /* Set up proportionate scaling */
   width: 100%;
   height: auto;
-
+  z-index: -1;
   /* Set up positioning */
   position: fixed;
   top: 0;
@@ -52,13 +52,39 @@
 
 #sign-boxe{
   float :right;
-  margin-top: 230px;
+  margin-top: 200px;
   margin-right: 180px;
   width: 32em;
-  height: 30em;
+  height: 34em;
   align-items: center;
   background-color: rgba(white, 0.8);
   padding-left: 20px;
   padding-top: 20px;
+  padding-right: 20px;
+
 
 }
+
+.sign-up {
+
+
+  padding-left: 55px;
+
+  width: 25em;
+
+
+}
+
+.sign-in {
+
+  padding-left: 80px;
+
+  width: 25em;
+  
+}
+
+
+.loginmodal-register{
+  cursor: pointer;
+}
+

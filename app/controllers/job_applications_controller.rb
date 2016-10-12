@@ -6,17 +6,28 @@ class JobApplicationsController < ApplicationController
  	end 
 
 	def index
-		@job_application = JobApplication.where(job_id: params[:job_id])
+		all_job_application = JobApplication.where(job_id: params[:job_id])
+		@job_application = []
+		all_job_application.each do |application|
+			unless application.check_clash?
+				@job_application << application
+			end
+		end 		
+		
 	end
 
 	def show
 	end
-
+ 
 	def create
 
 		@job_application = current_user.job_applications.new(job_application_params)
 		@job = @job_application.job
 		if @job_application.save
+			#create a notification
+			# @job.users.uniq - [current_user]).each do |user|
+			# 	Notification.create(recipient:user, actor: current_user, action: "posted", notifiable: @job_application)
+			# end
 			# job_id = @job_application.job_id
 			# @job = Job.find(job_id)
 			flash[:success] = "Thanks for your interest in this job! You will hear if you were successful soon."
@@ -31,7 +42,7 @@ class JobApplicationsController < ApplicationController
 	def update 	
 		@job_application.update(confirmed: true)
 		flash[:success] = "You have confirmed this applicant for your job!"
-		redirect_to @job_application.job
+		redirect_to job_job_applications_path(@job_application.job)
 	end
 
 	def destroy

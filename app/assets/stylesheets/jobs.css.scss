@@ -25,6 +25,7 @@
 	width: 50%;
   background-color: #fff;
   overflow-y: hidden;
+  overflow-x: hidden;
 	z-index: 10;
 	left: 0px !important;
 }
@@ -40,6 +41,14 @@
 	overflow-x: hidden;
 }
 
+#search-submit2{
+	margin-left: 1.7em;	
+}
+
+.btn-to-submit{
+	width: 5em;
+}
+
 #map-container{
 	margin: 0px;
 	padding: 0px;
@@ -48,7 +57,7 @@
 }
 
 #list_job .box{
-	position:relative	
+	position:relative
 }
 
 #list_job .panel-heading{
@@ -56,8 +65,10 @@
 	background: #FFF !important;
 }
 
+
+
 .job-span{
-	position:absolute; 
+	position:absolute;
   width:100%;
   height:100%;
   top:0;
@@ -67,25 +78,27 @@
 
 }
 
-.job-text {
-	min-height: 150px;
+.new-job-des {
+	min-height: auto;
+	resize: none;
 }
 
 .job-info-col{
-	background:#B7F36E  ;
 	height: 100%;
 }
 
 .job-info-col table{
-	text-align:center; 
+	text-align:center;
 }
 
 .job-info-col th{
 	font-size:12px;
+
 }
 
 .job-info-col td{
-	text-align:left; 
+	text-align:left;
+
 }
 
 .info_window_image{

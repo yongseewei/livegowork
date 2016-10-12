@@ -58,6 +58,8 @@ gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 gem 'private_pub'
 gem 'thin'
 gem 'api-ai-ruby', '~> 1.2', '>= 1.2.1'
+gem 'fog'
+gem 'aws-sdk', '~> 2.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -82,3 +84,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+	gem 'rails_12factor'
+
+	gem 'puma', '~> 3.6'
+end

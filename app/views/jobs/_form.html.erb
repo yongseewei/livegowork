@@ -1,47 +1,52 @@
 <div class="container" id="sign-page">
-<div id="sign-boxe">
-<div class="col-md-8 col-md-offset-2"
-<%= form_for @job do |f| %>
-	<div class="input-group"> 
-		<span class="input-group-addon"><span class="glyphicon glyphicon-edit"></span></span>
-		<%= f.text_field :title, placeholder:"Title", class: "form-control" %>
+
+	<div id="sign-boxe">
+		<%= form_for @job do |f| %>
+			<div class="input-group"> 
+				<span class="input-group-addon"><span class="fa fa-pencil-square-o"></span></span>
+				<%= f.text_field :title, placeholder:"Title", class: "form-control" %>
+			</div><br>
+
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+				<%= f.text_field :location, placeholder:"Location", class: "form-control" %>
+			</div><br>
+
+			<div class="input-group">
+				<span class="input-group-addon"> <span class="fa fa-money"></span> </span>
+				<%= f.number_field :salary, placeholder:"Job Salary (MYR/day)", class: "form-control" %>
+			</div><br>
+
+			<div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
+		    <%= f.file_field :images, multiple: true, class: "form-control" %>
+		  </div><br>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						<%= f.date_field :start_date, type: 'text', id: "newDateFrom", size: "10", placeholder: "Start Date", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						<%= f.date_field :end_date, type: 'text', id: "newDateTo", size: "10", placeholder: "End Date" , class: "form-control" %>
+					</div>
+				</div>
+			</div><br>
+
+
+			<div class="input-group">		
+				<span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+				<%= f.text_area :description, type: 'text',placeholder:"Job Desciption", class: "form-control new-job-des" %>
+			</div><br>
+
+			<div class="row text-center">
+				<%= f.button :submit, class: "btn btn-primary" %>
+			</div>
+		<%end%> 
 	</div>
-
-	<p id="job_location">
-		<%= f.label :location %><br>
-		<span class="glyphicon glyphicon-map-marker"></span>
-		<%= f.text_field :location, placeholder:"Location"  %>
-
-	<p id="job_salary">
-		<%= f.label :salary %><br>
-		<span class="glyphicon glyphicon-piggy-bank"></span>
-		<%= f.number_field :salary, placeholder:"Job Salary" %>
-
-	<div class="form-group">
-	<span class="glyphicon glyphicon-picture"></span>
-    <%= f.label :images %>
-    <%= f.file_field :images, multiple: true %><br>
-
-	<div class="row">
-		<div class="col-md-6">
-			<label for="dateFrom">Start Date</label>
-			<span class="glyphicon glyphicon-calendar"></span>
-			<%= f.date_field :start_date, type: 'text', id: "newDateFrom", size: "12", placeholder: "dd/mm/yyyy" %>
-		</div>
-
-		<div class="col-md-6">
-			<label for="dateTo">End Date</label>
-			<span class="glyphicon glyphicon-calendar"></span>
-			<%= f.date_field :end_date, type: 'text', id: "newDateTo", size: "12", placeholder: "dd/mm/yyyy" %>
-		</div>
-	</div><br>
-
-	<p id="job_description">
-		<%= f.label :description %><br>
-		<span class="glyphicon glyphicon-comment"></span>
-		<%= f.text_field :description, placeholder:"Job Desciption"  %>
-
-	<div class="row text-center">
-		<%= f.button :submit, class: "btn btn-primary" %>
-	</div>
-<%end%> 
+</div>

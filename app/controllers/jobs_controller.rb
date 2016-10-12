@@ -5,12 +5,23 @@ class JobsController < ApplicationController
   def index
   	@search = params[:query].presence || "Kuala Lumpur"
     @jobs = Job.near(@search,8)
+    filtering_params(params).each do |key, value|
+      @jobs = @jobs.public_send(key, value) if value.present?
+    end
     @jobs.length == 0 ? set_position : set_marker
+    # byebug
+    respond_to do |format|
+      format.js 
+      format.html
+    end
   end
 
   def filter
+    @jobs = Job.where(id: filtering_id(params).split(" ")) if filtering_id(params).present?
     filtering_params(params).each do |key, value|
-      @jobs = Job.public_send(key, value) if value.present?
+      if value.present?
+        @jobs = @jobs.nil? ? Job.public_send(key, value) : @jobs.public_send(key, value)
+      end
     end
     set_marker
   end
@@ -25,10 +36,10 @@ class JobsController < ApplicationController
     @job = Job.new
   end	
 
-  def create   
+  def create 
     @job = current_user.jobs.new(job_params)
     if @job.save
-       redirect_to @job, notice: "Successfully create new job!"
+      redirect_to @job, notice: "Successfully create new job!"
     else
       render :new
     end
@@ -39,8 +50,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      flash[:success] = 'You have updated your job successfully!'
-      redirect_to job_path(@job)
+      redirect_to job_path(@job), notice: "Successfully update your job!"
     else
       render :edit
     end
@@ -61,7 +71,11 @@ class JobsController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:filter_map, :filter_price)
+    params.slice(:filter_map, :filter_price, :filter_price2, :filter_job)
+  end
+
+  def filtering_id(params)
+    params.slice(:filter_id).values[0]
   end
 end
 

@@ -10,7 +10,7 @@ h1,h2,h3,h4{
 }
 
 .hero-unit {
-  background-image:url('cover3.jpg');
+  background-image:url('https://s3-ap-southeast-1.amazonaws.com/livegowork/cover3.jpg');
   background-size:cover;
 
    max-width: 100%;
@@ -309,7 +309,7 @@ ul.photo-gallery-list {
 }
 
 #categories .categories-post-grid .category li .post-meta a:hover {
-  
+
       background: rgba(black,0.1);
 
 }
@@ -340,3 +340,43 @@ ul.photo-gallery-list {
     height: calc(100% - 50px);
     overflow: auto;
 }
+
+.thumbnail {
+    height: 360px;
+    padding:0;
+}
+
+
+.style_image {
+    width: 100%;
+    height: 138px !important;
+}
+
+
+#job_profile{
+    float:right;
+}
+
+
+.bg-image {
+    position: relative;
+}
+.bg-image img {
+    display: block;
+    width: 100%;
+    max-width: 1200px; /* corresponds to max height of 450px */
+    margin: 0 auto;
+}
+.bg-image h1 {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+}
+.main {
+    background-color: #f6f6f6;
+    text-align: center;
+}
+
