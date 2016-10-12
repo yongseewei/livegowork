@@ -1,6 +1,6 @@
 class Job < ActiveRecord::Base
 	belongs_to :user
-	has_many :job_applications
+	has_many :job_applications, dependent: :destroy
 
   scope :salary_range, ->(min, max, id) { where(salary: min..max, id: id)}
   scope :filter_map, ->(loc) { where(salary: loc[:min]..loc[:max]).near([loc[:lat],loc[:lng]],loc[:zoom])}
@@ -33,4 +33,14 @@ class Job < ActiveRecord::Base
     
     return salary_range(min, max, id) if min && max 
   end
+
+  def confirm_range
+    range = []
+  	confirmed = self.job_applications.where(confirmed: true)
+  	confirmed.each do |application|
+      range << {start_date: application.start_date, end_date: application.end_date}
+    end
+    range
+  end
+
 end
