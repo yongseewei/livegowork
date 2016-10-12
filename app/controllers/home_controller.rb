@@ -3,5 +3,8 @@ class HomeController < ApplicationController
 		@jobs = Job.all
 	end
 
- 
+  def show
+    @job = Job.last(3)
+  end 
+
 end
