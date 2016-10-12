@@ -1,10 +1,33 @@
 <div id="job-index-content" class="row" style='margin: 0px'> 
 	<div class="col-md-6" id="left-job-index">
-
+		
 		<div id="sidebar-wrapper">
-			<h1>Jobs#index</h1>
-			<%= render 'slider' %>
+		<br>
+		<div class = "row">
+			<div class="col-md-8">
+				<%= form_tag "/jobs",  method: :get, id: "search-submit2" do %>
+					<div class="input-group">
+						<%= text_field_tag :query,"", {id: "query", class: "form-control typeahead", placeholder: "Search Location", autocomplete: "off", :autofocus=>true}  %>
+						<span class="input-group-btn"><%= submit_tag "Search", {class: "btn btn-default btn-to-submit"} %></span>
+					</div>
+				<% end %>
+			</div>
+			</div>
+			<br>
+			<div class = "row">
+				<%= render 'slider' %>
+				<div class="col-md-4">
+					<%= form_tag "/jobs/filter",  method: :post, id: "job-filter" do %>
+					<div class="input-group">
+						<%= text_field_tag "filter_job[name]","", {id: "filter-job", class: "form-control typeahead", placeholder: "Job Filter", autocomplete: "off", :autofocus=>true}  %>
+						<%= hidden_field_tag 'filter_id', @jobs.map(&:id), id: '' %>	
+						<span class="input-group-btn"><%= submit_tag "Filter", {class: "btn btn-default btn-to-submit"} %></span>
+					</div>
+					<% end %>
+				</div>
+			</div>	
   	</div>
+
   	<div class="spacer">
 		  &nbsp;
 		</div>
