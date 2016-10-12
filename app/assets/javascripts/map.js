@@ -45,7 +45,9 @@ $(document).on("turbolinks:load",function(){
   						 lng: handler.map.serviceObject.center.lng(), 
   						 zoom: zoom_to_radius(),
   						 min: $("#slider-range").slider("values", 0),
-  						 max: max_price() }},
+  						 max: max_price() },
+  						 filter_job: {name: $("#filter-job").val()}
+  						},
   		dataType: "script",
   		success: function(msg) {
   			redraw_marker()
