@@ -21,7 +21,7 @@ var ready = function () {
      * Used to minimize the chatbox
      */
 
-    $(document).on('click', '.toggleChatBox', function (e) {
+    $(document).on('click', '.toggleChatBox,.chatboxhead', function (e) {
         e.preventDefault();
         var chatbox = $(".chatbox .chatboxcontent")
         var id = $(this).data('cid');
@@ -29,7 +29,6 @@ var ready = function () {
         $('.chatboxcontent').toggle();
         $('.chatboxinput').toggle();
         $('.chatboxoptions').find("a").toggle()
-        debugger
         if($('.chatboxinput').css('display') == "block"){
             $(".chatboxhead").removeClass("chatboxclose")
         }
