@@ -3,10 +3,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  include CarrierWave::Compatibility::Paperclip
+
   # Choose what kind of storage to use for this uploader:
-  # storage :file
-  storage :fog
+  storage :file
+  # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -29,11 +29,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
   version :thumb do
-    process resize_to_fill: [225, 225]
+    process resize_to_fill: [50,50]
   end
 
   version :medium do
-    process resize_to_fill: [300, 225]
+    process resize_to_fill: [140, 140]
   end
 
   version :square do
