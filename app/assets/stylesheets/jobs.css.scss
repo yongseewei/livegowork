@@ -25,6 +25,7 @@
 	width: 50%;
   background-color: #fff;
   overflow-y: hidden;
+  overflow-x: hidden;
 	z-index: 10;
 	left: 0px !important;
 }
@@ -38,6 +39,14 @@
 .job-lists{
 	overflow-y: auto;
 	overflow-x: hidden;
+}
+
+#search-submit2{
+	margin-left: 1.7em;	
+}
+
+.btn-to-submit{
+	width: 5em;
 }
 
 #map-container{
