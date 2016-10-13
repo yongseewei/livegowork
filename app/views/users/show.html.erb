@@ -118,7 +118,9 @@
                 <div class="col-md-3 text-center">
               <%= image_tag review.reviewer.avatar.url(:thumb), class: "center-block img-circle img-thumbnail img-responsive" %>
                   </div>
-                    <p><strong>reviewed by: </strong> <%= review.reviewer.full_name %> </p>
+                    <p><strong>reviewed by: </strong> <%= link_to user_path(review.reviewer) do%>
+                      <%= review.reviewer.full_name %>
+                      <% end %> </p>
                     <p><strong>comments: </strong> <%= review.comments %> </p>
                       <script>
                         $('#stars_<%= review.id %>').raty({
