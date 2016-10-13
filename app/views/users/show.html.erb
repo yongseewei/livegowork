@@ -104,6 +104,12 @@
 <% end %>
 
 
+<% applications = JobApplication.where(user_id: @user.id, confirmed: true) %> 
+<% applications.each do |a| %>
+<%= a.job.title %>
+<% end %>
+
+
 <% @user.reviews.each_slice(3) do |row| %>
 <div class="row">
   <% row.each do |review| %>
@@ -118,7 +124,9 @@
                 <div class="col-md-3 text-center">
               <%= image_tag review.reviewer.avatar.url(:small_thumb), class: "center-block img-circle img-thumbnail img-responsive" %>
                   </div>
-                    <p><strong>reviewed by: </strong> <%= review.reviewer.full_name %> </p>
+                    
+                    <p><strong><%= link_to 'Reviewed by', user_path(review.reviewer) %> </strong> <%= review.reviewer.full_name %> </p>
+                    
                     <p><strong>comments: </strong> <%= review.comments %> </p>
                       <script>
                         $('#stars_<%= review.id %>').raty({

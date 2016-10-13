@@ -10,6 +10,7 @@ class UsersController < Clearance::UsersController
   end
 
   def create
+    byebug
     @user = user_from_params
     if @user.save
       sign_in @user
@@ -31,6 +32,7 @@ class UsersController < Clearance::UsersController
   end
 
   def update
+    byebug
     if @user.update(user_params)
       redirect_to user_path(@user)
     else

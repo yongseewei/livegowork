@@ -114,3 +114,26 @@
 		</div>
 	</div>
 
+<div class="container">
+      <div class="row">
+      <%@jobs[0..2].each do |job|%>
+        <div class="col-xs-18 col-sm-6 col-md-3">
+          <div class="thumbnail">
+
+            <%= image_tag job.images[0].square.url, :class=> "style_image"%>
+           
+              <div class="caption" style="height:150px;">
+                   <%= image_tag job.user.avatar.url(:small_thumb), class: "img-circle my-imgcircle", id:"job_profile"%>
+                <h4><%=job.title%></h4>
+                <p><%=job.description%></p>
+                <p>RM <%=job.salary%> per month</p>
+                <%=link_to "Apply", job_path(job.id), class: "btn btn-info btn-xs"%>
+              </div>
+          </div>
+        </div>
+        <%end%>
+
+
+
+       </div>
+</div>
